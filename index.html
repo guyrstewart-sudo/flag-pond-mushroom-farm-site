@@ -234,6 +234,17 @@
   .foot-brand{font-family:'Fraunces',serif;color:var(--cream);font-size:1.1rem}
   .foot-legal{max-width:var(--maxw);margin:1.4rem auto 0;padding:1.1rem 22px 0;border-top:1px solid rgba(247,242,231,.14);color:#9aa791;font-size:.82rem}
 
+  /* ---------- Center all text (client request 2026-07-23) ---------- */
+  body{text-align:center}
+  .section-head,.hero p.lead,.photo-block p{margin-left:auto;margin-right:auto}
+  .order-steps,.order-form,.order-form .ff,.order-form label{text-align:center}
+  .order-form{margin-left:auto;margin-right:auto}
+  .order-form button{justify-self:center}
+  .hero-cta,.hero-note,.delivery-terms,.foot-grid{justify-content:center}
+  .card .ico{margin-left:auto;margin-right:auto}
+  .card h3{justify-content:center}
+  .contact-list li{justify-items:center}
+
   /* ---------- Reduced motion ---------- */
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
@@ -540,7 +551,7 @@
       <div class="foot-brand">Flag Pond Mushroom Farm</div>
       <div>Fresh gourmet mushrooms · Flag Pond, TN · Unicoi County</div>
     </div>
-    <div style="text-align:right">
+    <div style="text-align:center">
       <a href="#order" style="font-weight:700">Request wholesale pricing</a><br>
       <span>Tuesdays north · Thursdays south · Free over $50 · Net-14</span>
     </div>
