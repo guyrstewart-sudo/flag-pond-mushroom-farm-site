@@ -137,11 +137,24 @@
   .hero-card li{display:flex;gap:.6rem;align-items:flex-start;font-size:.98rem;color:#e9e2cf;text-align:left}
   .hero-card li b{color:#fff;font-weight:700}
   .leaf{color:var(--sage);flex:none;margin-top:.15rem}
+  /* This Week's Cut ticker (hero sidebar) — all text on dark forest, AA-checked */
+  .cut-card .cut-line{text-align:left;color:#e9e2cf;font-size:1rem;margin-bottom:.55rem}
+  .cut-card .cut-sub{text-align:left;color:#cfe0c2;font-size:.85rem;font-style:italic;margin-bottom:1.1rem}
+  .cut-card .cut-stamp{display:flex;gap:.55rem;align-items:flex-start;text-align:left;
+    border-top:3px double rgba(247,242,231,.35);padding-top:.95rem}
+  .cut-card .cut-stamp .leaf{margin-top:.2rem}
+  .cut-card .cut-stamp b{display:block;font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:1.02rem;line-height:1.25}
+  .cut-card .cut-vol{display:block;margin-top:.4rem;font-family:'Nunito Sans',sans-serif;
+    font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
   @media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding:2.4rem 0 2.4rem}.hero p.lead{max-width:none}}
 
-  /* Fixed-geometry mobile woodcut emblem (never glyph-derived) — shown < 860px only */
-  .hero-emblem{display:none;width:118px;height:auto;margin:0 auto 1.1rem}
+  /* Fixed-geometry mobile woodcut emblem (never glyph-derived) — carries the hero <=1180px.
+     Sized to feel intentional/premium, not a fallback: it grows on phones and centers
+     cleanly above the headline with generous breathing room. */
+  .hero-emblem{display:none;width:clamp(128px,30vw,168px);height:auto;margin:.4rem auto 1.5rem;
+    filter:drop-shadow(0 8px 16px rgba(35,58,41,.18))}
   @media(max-width:1180px){.hero-emblem{display:block}}
+  @media(max-width:560px){.hero-emblem{width:clamp(148px,44vw,180px);margin:.2rem auto 1.6rem}}
 
   /* ---------- Trust strip ---------- */
   .trust{background:var(--forest-deep);color:var(--cream);border-top:3px double rgba(247,242,231,.35);border-bottom:3px double rgba(247,242,231,.35)}
@@ -167,7 +180,7 @@
   .fare-item:focus-visible{outline:3px solid var(--forest);outline-offset:2px;border-radius:6px}
   .fare-row{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem}
   .fare-name{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.25rem,2.6vw,1.5rem);color:var(--forest-deep);flex:none}
-  .fleuron{color:var(--harvest-deep);font-style:normal}
+  .fleuron{color:var(--accent-ink);font-style:normal}
   .fare-flag{font-family:'Nunito Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--cta);padding:.2em .6em;border-radius:999px;vertical-align:middle;margin-left:.5rem}
   .fare-dots{flex:1 1 auto;border-bottom:2px dotted var(--rule);transform:translateY(-.28em);min-width:20px;transition:border-color .2s ease}
   .fare-item.is-added .fare-dots{border-bottom-style:solid;border-color:var(--moss)}
@@ -235,7 +248,8 @@
 
   /* Sheet-so-far aria-live panel */
   .sheet-panel{background:var(--kraft);border:1px solid var(--bark);border-radius:6px;padding:1rem 1.1rem;margin:0 auto 1.2rem;max-width:520px;text-align:left}
-  .sheet-panel .sheet-h{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:.5rem}
+  /* forest-deep, not accent-ink: accent-ink on --kraft is only ~4.05:1 (fails AA at this size) */
+  .sheet-panel .sheet-h{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--forest-deep);margin-bottom:.5rem}
   .sheet-empty{font-size:.88rem;color:var(--ink-soft);font-style:italic}
   .sheet-panel.has-items .sheet-empty{display:none}
   .sheet-panel ul{list-style:none;display:grid;gap:.4rem}
@@ -265,8 +279,10 @@
     padding:1.6rem 1.4rem;color:var(--ink);text-align:center;position:relative}
   .received-note b{color:var(--forest-deep)}
   .received-note p{color:var(--ink-soft);margin-top:.5rem;font-size:.98rem}
+  /* --cta-deep (#984f17) not --harvest-deep (#b3611f): at 1.15rem bold this counts as
+     small text, and #b3611f on cream is only 4.04:1 — just under AA. #984f17 = ~4.8:1, clears. */
   .received-stamp{display:inline-block;font-family:'Nunito Sans',sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--harvest-deep);border:3px solid var(--harvest-deep);border-radius:6px;padding:.35em .8em;font-size:1.15rem;
+    color:var(--cta-deep);border:3px solid var(--cta-deep);border-radius:6px;padding:.35em .8em;font-size:1.15rem;
     transform:rotate(-9deg);margin-bottom:1rem;opacity:.92;animation:stampin .35s ease-out}
   @keyframes stampin{0%{transform:rotate(-9deg) scale(1.8);opacity:0}60%{opacity:.92}100%{transform:rotate(-9deg) scale(1);opacity:.92}}
 
@@ -330,6 +346,39 @@
   /* ---------- IntersectionObserver "ink settle" (JS-added; safe default = visible) ---------- */
   .pre-settle{opacity:0;transform:translateY(10px)}
   .pre-settle.settled{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+
+  /* ---------- Full mobile pass (the wholesale buyer orders from a phone) ---------- */
+  @media(max-width:768px){
+    /* Every multi-column grid collapses to one clean column */
+    .hero-grid,.route-grid,.perks-grid,.contact-grid,.about-grid,.order-steps{grid-template-columns:1fr}
+    /* Comfortable vertical rhythm */
+    section{padding:3rem 0}
+    .section-head{margin-bottom:1.7rem}
+    .hero-grid{padding:2rem 0 2.4rem}
+    /* Order coupon fields — big, tappable, 16px to avoid iOS zoom, >=44px tall */
+    .order-form input,.order-form select,.order-form textarea{min-height:44px;font-size:1rem}
+    .order-form input,.order-form select{padding:.6em .4em}
+    .order-form textarea{min-height:132px}
+    .order-card{padding:2rem 1.5rem}
+    /* Body links a touch taller for the thumb */
+    .report-body a,#standing p a,footer a,.foot-legal a{display:inline-block;padding:.15em 0}
+  }
+  @media(max-width:560px){
+    section{padding:2.4rem 0}
+    .order-card{padding:1.8rem 1.15rem}
+    .clip-line{font-size:.72rem}
+    /* Keep the sticky stamp CTA reachable and uncramped on narrow phones */
+    .runhead{gap:.6rem}
+    .runhead-title{min-width:0;overflow:hidden;text-overflow:ellipsis}
+    /* Bill of Fare: dotted leader already hidden below; name (left) + mkt. (right) on one line,
+       italic descriptor wraps beneath, whole line stays a >=44px tap target */
+    .fare-name{flex:1 1 auto;min-width:0}
+    .fare-price{flex:none}
+    .fare-item{padding:1rem .2rem}
+    .sheet-panel{padding:1rem}
+    /* Promote the footer's primary "Send your sheet" link to a >=44px thumb target */
+    .foot-grid a[href="#order"]{display:inline-block;padding:.6em 0}
+  }
 
   /* ---------- Reduced motion / contrast / forced colors ---------- */
   @media (prefers-reduced-motion: reduce){
@@ -404,16 +453,30 @@
               <line x1="0" y1="0" x2="0" y2="6" stroke="#233a29" stroke-width="1" stroke-opacity="0.18"/>
             </pattern>
           </defs>
-          <circle cx="60" cy="52" r="40" fill="#efe6d2" stroke="#233a29" stroke-width="2.5"/>
-          <circle cx="60" cy="52" r="40" fill="url(#emblem-hatch)"/>
-          <!-- radiating lion's-mane spines -->
+          <!-- Domed woodcut medallion (the cap) -->
+          <circle cx="60" cy="50" r="38" fill="#efe6d2" stroke="#233a29" stroke-width="2.5"/>
+          <circle cx="60" cy="50" r="38" fill="url(#emblem-hatch)"/>
+          <!-- Cascading lion's-mane spines, wrapping the full lower hemisphere for a
+               shaggy, full pom-pom silhouette (fixed geometry, never glyph-derived). -->
           <g stroke="#233a29" stroke-width="2" stroke-linecap="round" fill="none">
-            <path d="M60 92 q-3 12 0 22"/><path d="M48 90 q-5 11 -4 20"/><path d="M72 90 q5 11 4 20"/>
-            <path d="M37 84 q-8 9 -9 18"/><path d="M83 84 q8 9 9 18"/>
-            <path d="M30 74 q-11 6 -14 14"/><path d="M90 74 q11 6 14 14"/>
-            <path d="M52 91 q-1 10 -1 17"/><path d="M68 91 q1 10 1 17"/>
+            <path d="M24 62 q-4 10 -3 20"/>
+            <path d="M31 74 q-5 10 -5 19"/>
+            <path d="M40 82 q-4 11 -3 20"/>
+            <path d="M50 87 q-2 11 -1 21"/>
+            <path d="M60 89 q0 12 0 23"/>
+            <path d="M70 87 q2 11 1 21"/>
+            <path d="M80 82 q4 11 3 20"/>
+            <path d="M89 74 q5 10 5 19"/>
+            <path d="M96 62 q4 10 3 20"/>
           </g>
-          <circle cx="60" cy="52" r="40" fill="none" stroke="#5f7a4f" stroke-width="1" stroke-opacity="0.5"/>
+          <!-- Shorter inner spines for density -->
+          <g stroke="#233a29" stroke-width="1.7" stroke-linecap="round" stroke-opacity=".72" fill="none">
+            <path d="M45 85 q-2 8 -1 15"/>
+            <path d="M55 88 q-1 8 0 15"/>
+            <path d="M65 88 q1 8 0 15"/>
+            <path d="M75 85 q2 8 1 15"/>
+          </g>
+          <circle cx="60" cy="50" r="38" fill="none" stroke="#5f7a4f" stroke-width="1" stroke-opacity="0.5"/>
         </svg>
         <svg class="hero-mushroom" viewBox="0 0 596 614" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
           <defs>
@@ -461,16 +524,21 @@
         <p class="hero-note"><span class="dot" aria-hidden="true"></span> Send your weekly list through the coupon — we reply with pricing and your first delivery.</p>
       </div>
       <div class="hero-art">
-        <div class="hero-card">
-          <span class="kicker">In this issue</span>
-          <h3>Fresh from the farm</h3>
-          <ul>
-            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Lion's mane</b> — our flagship. Big, snow-white heads with a crab-and-lobster sweetness.</span></li>
-            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Blue &amp; grey oyster</b> — tender clusters, quick on the flat-top.</span></li>
-            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Golden &amp; pink oyster</b> — showy color that holds on the plate.</span></li>
-            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Shiitake &amp; chestnut</b> — meaty, deep, kitchen workhorses.</span></li>
-          </ul>
-        </div>
+        <!-- This Week's Cut — a masthead-style freshness sidebar. Reinforces the freshness
+             spine WITHOUT duplicating the full Bill of Fare and WITHOUT any live-stock claim. -->
+        <!-- UPDATE WEEKLY: refresh the 3 species below + the two "Week of Jul 21" runheads
+             (here and in the masthead), or soften "running strong right now" to "in season now"
+             and let the runhead date carry the week. No live-stock quantity claim here by design. -->
+        <aside class="hero-card cut-card" aria-label="This week's cut">
+          <span class="kicker">This Week's Cut</span>
+          <h3>Cut fresh this week — at their peak</h3>
+          <p class="cut-line">Lion's mane, blue oyster &amp; shiitake are running strong right now — a taste of the season's flushes.</p>
+          <p class="cut-sub">The full standing list is in the Bill of Fare below.</p>
+          <div class="cut-stamp">
+            <svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg>
+            <span><b>Harvested the morning we deliver</b><span class="cut-vol">Vol.&nbsp;I · Week of Jul&nbsp;21</span></span>
+          </div>
+        </aside>
       </div>
     </div>
   </div>
@@ -761,7 +829,8 @@
 
 <script>
   // Keep the footer year current. Degrades to the hardcoded year above.
-  document.getElementById('yr').textContent = new Date().getFullYear();
+  var yrEl = document.getElementById('yr');
+  if (yrEl) yrEl.textContent = new Date().getFullYear();
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -781,13 +850,21 @@
   (function () {
     if (reduceMotion || !('IntersectionObserver' in window)) return;
     var els = document.querySelectorAll('[data-settle]');
+    if (!els.length) return;
+    // Only hide once we're certain the observer is attached below.
     els.forEach(function (el) { el.classList.add('pre-settle'); });
-    var io = new IntersectionObserver(function (entries) {
+    var revealAll = function () { els.forEach(function (el) { el.classList.add('settled'); }); };
+    var io = new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('settled'); io.unobserve(e.target); }
+        if (e.isIntersecting) { e.target.classList.add('settled'); obs.unobserve(e.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     els.forEach(function (el) { io.observe(el); });
+    // Safety net: content must NEVER stay permanently hidden if the observer
+    // never fires (odd viewports, bfcache restore, layout races). Reveal on load
+    // and via a hard timeout — revealAll is idempotent.
+    window.addEventListener('load', function () { setTimeout(revealAll, 1200); });
+    setTimeout(revealAll, 2500);
   })();
 
   // ---- The Bill of Fare: tap-to-fill the coupon + portions-math into "Your sheet so far" ----
