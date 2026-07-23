@@ -248,9 +248,8 @@
   /* ---------- Hero mushroom motif (headline = cap, paragraph = stem) ---------- */
   .hero-copy{position:relative}
   .hero-copy > :not(.hero-mushroom){position:relative;z-index:1}
-  .hero-mushroom{position:absolute;left:50%;top:6px;transform:translateX(-50%);
-    width:126%;height:109%;z-index:0;pointer-events:none}
-  @media(max-width:860px){.hero-mushroom{width:140%;height:106%;opacity:.72}}
+  .hero-mushroom{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  @media(max-width:860px){.hero-mushroom{display:none}}
 
   /* ---------- Reduced motion ---------- */
   @media (prefers-reduced-motion: reduce){
@@ -300,31 +299,26 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
-        <svg class="hero-mushroom" viewBox="0 0 680 620" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <svg class="hero-mushroom" viewBox="0 0 596 614" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
           <defs>
-            <linearGradient id="capg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#8ba97a" stop-opacity="0.36"/>
-              <stop offset="1" stop-color="#5f7a4f" stop-opacity="0.17"/>
-            </linearGradient>
-            <linearGradient id="stemg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#f7f2e7" stop-opacity="0.52"/>
-              <stop offset="1" stop-color="#e2d3b3" stop-opacity="0.34"/>
+            <linearGradient id="mush" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#8ba97a" stop-opacity="0.32"/>
+              <stop offset="0.70" stop-color="#8ba97a" stop-opacity="0.22"/>
+              <stop offset="0.74" stop-color="#efe6d2" stop-opacity="0.44"/>
+              <stop offset="1" stop-color="#e2d3b3" stop-opacity="0.32"/>
             </linearGradient>
           </defs>
-          <!-- stem (behind the paragraph): plump, waisted, flared base -->
-          <path d="M196 338 C186 396 216 426 216 460 C216 502 170 522 167 556 C164 586 250 598 340 598 C430 598 516 586 513 556 C510 522 464 502 464 460 C464 426 494 396 484 338 Z"
-                fill="url(#stemg)" stroke="#233a29" stroke-width="3.5" stroke-opacity="0.5" stroke-linejoin="round"/>
-          <!-- cap (behind the headline): wide plump dome, overhanging rim -->
-          <path d="M36 290 C36 134 204 46 340 46 C476 46 644 134 644 290 C644 320 560 341 468 347 C386 353 294 353 212 347 C120 341 36 320 36 290 Z"
-                fill="url(#capg)" stroke="#233a29" stroke-width="4" stroke-opacity="0.58" stroke-linejoin="round"/>
-          <!-- gills under the cap rim -->
-          <g stroke="#5b4632" stroke-opacity="0.20" stroke-width="2" stroke-linecap="round">
-            <path d="M165 318 C202 340 258 349 308 351"/>
-            <path d="M515 318 C478 340 422 349 372 351"/>
-            <path d="M308 330 L311 352"/>
-            <path d="M372 330 L369 352"/>
-            <path d="M340 332 L340 353"/>
-          </g>
+          <!-- One continuous mushroom silhouette that traces AROUND the text: the cap
+               wraps the eyebrow + headline, the stem flanks the paragraph. No stroke
+               crosses any glyph (verified against measured line boxes). -->
+          <path d="M100 -4 C175 -26 421 -26 496 -4
+                   C504 16 498 60 516 100 C548 155 606 205 610 250 C614 282 612 300 610 316
+                   C610 346 548 356 504 372 C502 382 503 386 503 392
+                   C504 425 505 448 505 470 C506 494 414 508 298 508
+                   C182 508 90 494 91 470 C91 448 92 425 93 392
+                   C93 386 94 382 92 372 C48 356 -14 346 -14 316
+                   C-14 300 -10 280 -4 250 C10 205 48 155 80 100 C98 60 92 16 100 -4 Z"
+                fill="url(#mush)" stroke="#233a29" stroke-width="3" stroke-opacity="0.55" stroke-linejoin="round"/>
         </svg>
         <span class="eyebrow">Fresh · Local · Direct to your kitchen</span>
         <h1>Gourmet mushrooms, <em>harvested the morning</em> we deliver.</h1>
