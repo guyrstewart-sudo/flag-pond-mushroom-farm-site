@@ -248,9 +248,9 @@
   /* ---------- Hero mushroom motif (headline = cap, paragraph = stem) ---------- */
   .hero-copy{position:relative}
   .hero-copy > :not(.hero-mushroom){position:relative;z-index:1}
-  .hero-mushroom{position:absolute;left:50%;top:-4px;transform:translateX(-50%);
-    width:120%;height:116%;z-index:0;pointer-events:none}
-  @media(max-width:860px){.hero-mushroom{width:132%;height:110%;opacity:.72}}
+  .hero-mushroom{position:absolute;left:50%;top:6px;transform:translateX(-50%);
+    width:126%;height:109%;z-index:0;pointer-events:none}
+  @media(max-width:860px){.hero-mushroom{width:140%;height:106%;opacity:.72}}
 
   /* ---------- Reduced motion ---------- */
   @media (prefers-reduced-motion: reduce){
@@ -300,30 +300,30 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
-        <svg class="hero-mushroom" viewBox="0 0 620 520" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <svg class="hero-mushroom" viewBox="0 0 680 620" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="capg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#8ba97a" stop-opacity="0.34"/>
-              <stop offset="1" stop-color="#5f7a4f" stop-opacity="0.15"/>
+              <stop offset="0" stop-color="#8ba97a" stop-opacity="0.36"/>
+              <stop offset="1" stop-color="#5f7a4f" stop-opacity="0.17"/>
             </linearGradient>
             <linearGradient id="stemg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#efe6d2" stop-opacity="0.44"/>
-              <stop offset="1" stop-color="#e2d3b3" stop-opacity="0.28"/>
+              <stop offset="0" stop-color="#f7f2e7" stop-opacity="0.52"/>
+              <stop offset="1" stop-color="#e2d3b3" stop-opacity="0.34"/>
             </linearGradient>
           </defs>
-          <!-- stem (behind the paragraph) -->
-          <path d="M205 256 C198 322 196 392 220 424 C236 448 384 448 400 424 C424 392 422 322 415 256 Z"
-                fill="url(#stemg)" stroke="#233a29" stroke-width="3" stroke-opacity="0.42" stroke-linejoin="round"/>
-          <!-- cap (behind the headline) -->
-          <path d="M44 248 C44 112 214 42 310 42 C406 42 576 112 576 248 C576 270 516 286 456 290 C378 298 242 298 164 290 C104 286 44 270 44 248 Z"
-                fill="url(#capg)" stroke="#233a29" stroke-width="3.5" stroke-opacity="0.5" stroke-linejoin="round"/>
+          <!-- stem (behind the paragraph): plump, waisted, flared base -->
+          <path d="M196 338 C186 396 216 426 216 460 C216 502 170 522 167 556 C164 586 250 598 340 598 C430 598 516 586 513 556 C510 522 464 502 464 460 C464 426 494 396 484 338 Z"
+                fill="url(#stemg)" stroke="#233a29" stroke-width="3.5" stroke-opacity="0.5" stroke-linejoin="round"/>
+          <!-- cap (behind the headline): wide plump dome, overhanging rim -->
+          <path d="M36 290 C36 134 204 46 340 46 C476 46 644 134 644 290 C644 320 560 341 468 347 C386 353 294 353 212 347 C120 341 36 320 36 290 Z"
+                fill="url(#capg)" stroke="#233a29" stroke-width="4" stroke-opacity="0.58" stroke-linejoin="round"/>
           <!-- gills under the cap rim -->
-          <g stroke="#5b4632" stroke-opacity="0.18" stroke-width="2" stroke-linecap="round">
-            <path d="M150 268 C182 283 224 289 256 291"/>
-            <path d="M470 268 C438 283 396 289 364 291"/>
-            <path d="M256 272 L260 292"/>
-            <path d="M364 272 L360 292"/>
-            <path d="M310 274 L310 293"/>
+          <g stroke="#5b4632" stroke-opacity="0.20" stroke-width="2" stroke-linecap="round">
+            <path d="M165 318 C202 340 258 349 308 351"/>
+            <path d="M515 318 C478 340 422 349 372 351"/>
+            <path d="M308 330 L311 352"/>
+            <path d="M372 330 L369 352"/>
+            <path d="M340 332 L340 353"/>
           </g>
         </svg>
         <span class="eyebrow">Fresh · Local · Direct to your kitchen</span>
