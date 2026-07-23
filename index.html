@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- PREVIEW DEPLOY: keep this out of search engines until John approves a public launch. Delete these two lines at go-live (see DEPLOY.md §8). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Flag Pond Mushroom Farm — Fresh Gourmet Mushrooms, Harvested the Morning We Deliver</title>
+<meta name="description" content="Fresh gourmet mushrooms grown and harvested the morning of delivery near Flag Pond, TN. Lion's mane, oyster, shiitake and chestnut — wholesale, direct to your kitchen across the Tri-Cities and Asheville corridor.">
+<meta name="theme-color" content="#233a29">
+<meta property="og:site_name" content="Flag Pond Mushroom Farm">
+<meta property="og:title" content="Flag Pond Mushroom Farm">
+<meta property="og:description" content="Fresh gourmet mushrooms, harvested the morning we deliver. Wholesale, direct to your kitchen — Tri-Cities TN and the Asheville corridor.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='88'%3E%F0%9F%8D%84%3C/text%3E%3C/svg%3E">
+<!-- Fonts are a progressive enhancement only. The page is fully legible with the local
+     fallbacks below if these never load — see DEPLOY.md to self-host or remove them. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#2f4a34;        /* deep forest green — primary */
+    --forest-deep:#233a29;
+    --moss:#5f7a4f;          /* mid green */
+    --sage:#8ba97a;          /* soft sage */
+    --cream:#f7f2e7;         /* warm cream — page bg */
+    --cream-deep:#efe6d2;    /* card / band */
+    --kraft:#e2d3b3;         /* kraft tan */
+    --bark:#5b4632;          /* warm brown text accent */
+    --ink:#2c271f;           /* near-black warm ink */
+    --ink-soft:#544c3e;      /* muted body */
+    --harvest:#d98a34;       /* bright amber — accents on DARK backgrounds only */
+    --harvest-deep:#c1741f;  /* amber for large text on light (headlines) */
+    --cta:#b3611f;           /* primary button bg — AA 4.5:1 with white */
+    --cta-deep:#984f17;      /* primary button hover */
+    --accent-ink:#9a4f18;    /* deep terracotta — small accent text on LIGHT (AA) */
+    --gold:#eab24f;          /* light gold — small accent text on DARK (AA) */
+    --line:rgba(91,70,50,.16);
+    --shadow:0 18px 44px -22px rgba(35,58,41,.55);
+    --radius:16px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Nunito Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);background:var(--cream);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,'Times New Roman',serif;line-height:1.1;color:var(--forest-deep);font-weight:600;letter-spacing:-.01em}
+  a{color:var(--forest);text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  section[id]{scroll-margin-top:76px}
+  .eyebrow{font-family:'Nunito Sans',sans-serif;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:700;color:var(--accent-ink)}
+
+  /* ---------- Skip link (accessibility) ---------- */
+  .skip-link{position:absolute;left:-999px;top:0;z-index:200;background:var(--forest-deep);color:#fff;
+    padding:.7rem 1.1rem;border-radius:0 0 10px 0;font-weight:700;text-decoration:none}
+  .skip-link:focus{left:0}
+
+  /* ---------- Focus visibility ---------- */
+  a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:4px}
+  .btn:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 5px rgba(154,79,24,.95)}
+
+  /* ---------- Buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:.55em;font-family:'Nunito Sans',sans-serif;font-weight:700;
+    font-size:1rem;padding:.85em 1.5em;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+  .btn-primary{background:var(--cta);color:#fff;box-shadow:0 10px 22px -10px rgba(152,79,23,.75)}
+  .btn-primary:hover{background:var(--cta-deep);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--forest);border-color:var(--forest)}
+  .btn-ghost:hover{background:var(--forest);color:var(--cream)}
+
+  /* ---------- Header ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(247,242,231,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 22px;max-width:var(--maxw);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;color:var(--forest-deep);min-width:0}
+  .brand .mark{width:38px;height:38px;flex:none}
+  .brand small{display:block;font-family:'Nunito Sans',sans-serif;font-weight:600;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss)}
+  nav.links{display:flex;gap:1.4rem;align-items:center}
+  nav.links a{font-weight:600;font-size:.94rem;color:var(--ink-soft)}
+  nav.links a:hover{color:var(--forest)}
+  .header-cta{font-weight:700;white-space:nowrap;flex:none}
+  @media(max-width:860px){nav.links{display:none}}
+  @media(max-width:560px){
+    .brand{font-size:1rem;gap:.45rem}
+    .brand .mark{width:32px;height:32px}
+    .brand small{font-size:.56rem;letter-spacing:.12em}
+    .header-cta{padding:.7em 1.05em;font-size:.92rem}
+    .nav{gap:.6rem;padding:.6rem 16px}
+    .wrap{padding:0 16px}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;overflow:hidden;background:
+    radial-gradient(120% 90% at 80% -10%,rgba(139,169,122,.35),transparent 60%),
+    linear-gradient(180deg,var(--cream) 0%,var(--cream-deep) 100%)}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:2.5rem;align-items:center;padding:4.2rem 0 4rem}
+  .hero h1{font-size:clamp(2.4rem,5.4vw,4rem);margin:.5rem 0 1rem}
+  .hero h1 em{font-style:italic;color:var(--harvest-deep)}
+  .hero p.lead{font-size:1.18rem;color:var(--ink-soft);max-width:34ch;margin-bottom:1.7rem}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+  .hero-note{margin-top:1.1rem;font-size:.9rem;color:var(--bark);display:flex;align-items:center;gap:.5rem}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px rgba(95,122,79,.25);flex:none}
+  .hero-art{position:relative}
+  .hero-card{background:var(--forest);color:var(--cream);border-radius:var(--radius);padding:1.6rem 1.7rem;box-shadow:var(--shadow)}
+  .hero-card h3{color:var(--cream);font-size:1.3rem;margin-bottom:.9rem}
+  .hero-card ul{list-style:none;display:grid;gap:.65rem}
+  .hero-card li{display:flex;gap:.6rem;align-items:flex-start;font-size:.98rem;color:#e9e2cf}
+  .hero-card li b{color:#fff;font-weight:700}
+  .leaf{color:var(--sage);flex:none;margin-top:.15rem}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding:3rem 0 2.6rem}.hero p.lead{max-width:none}}
+
+  /* ---------- Trust strip ---------- */
+  .trust{background:var(--forest-deep);color:var(--cream)}
+  .trust .wrap{display:flex;flex-wrap:wrap;gap:1.4rem 2.4rem;justify-content:center;padding:1.05rem 22px;text-align:center}
+  .trust b{color:#fff}
+  .trust span{font-size:.95rem;color:#dcd7c4;display:inline-flex;align-items:center;gap:.5rem}
+
+  /* ---------- Sections ---------- */
+  section{padding:4.4rem 0}
+  .section-head{max-width:60ch;margin-bottom:2.4rem}
+  .section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:.5rem 0 .7rem}
+  .section-head p{font-size:1.08rem;color:var(--ink-soft)}
+
+  /* ---------- What we grow ---------- */
+  .grow{background:var(--cream-deep)}
+  .grid{display:grid;gap:1.1rem}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.4rem;transition:transform .16s ease,box-shadow .16s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .card .ico{width:52px;height:52px;border-radius:12px;background:var(--kraft);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+  .card h3{font-size:1.28rem;margin-bottom:.15rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+  .flag{font-family:'Nunito Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--cta);padding:.18em .6em;border-radius:999px}
+  .card p{font-size:.96rem;color:var(--ink-soft);margin-top:.3rem}
+  .card .use{margin-top:.7rem;font-size:.85rem;color:var(--bark);font-style:italic}
+
+  /* ---------- Story ---------- */
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;align-items:center}
+  @media(max-width:820px){.story-grid{grid-template-columns:1fr;gap:1.8rem}}
+  .timeline{list-style:none;display:grid;gap:1.1rem;margin-top:.4rem}
+  .timeline li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
+  .time{font-family:'Fraunces',serif;font-weight:700;color:var(--accent-ink);font-size:1.05rem;white-space:nowrap;padding-top:.05rem}
+  .timeline b{display:block;color:var(--forest-deep)}
+  .timeline p{font-size:.95rem;color:var(--ink-soft)}
+  .photo-block{background:linear-gradient(160deg,var(--moss),var(--forest-deep));border-radius:var(--radius);color:var(--cream);padding:2rem;min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .photo-block .big{font-family:'Fraunces',serif;font-size:2.6rem;line-height:1;color:#fff;margin-bottom:.4rem}
+  .photo-block p{color:#e9e2cf;font-size:1rem;max-width:32ch}
+  .photo-block .spores{position:absolute;inset:0;opacity:.5;background:
+    radial-gradient(6px 6px at 20% 30%,rgba(255,255,255,.25),transparent),
+    radial-gradient(4px 4px at 70% 20%,rgba(255,255,255,.2),transparent),
+    radial-gradient(5px 5px at 85% 60%,rgba(255,255,255,.18),transparent),
+    radial-gradient(3px 3px at 40% 75%,rgba(255,255,255,.22),transparent)}
+
+  /* ---------- Delivery ---------- */
+  .delivery{background:var(--forest);color:var(--cream)}
+  .delivery h2,.delivery h3{color:#fff}
+  .delivery .section-head p{color:#dcd7c4}
+  .route-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+  @media(max-width:720px){.route-grid{grid-template-columns:1fr}}
+  .route{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.16);border-radius:var(--radius);padding:1.6rem}
+  .route .day{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--harvest);margin-bottom:.2rem}
+  .route h3{font-size:1.2rem;margin-bottom:.5rem}
+  .route p{color:#dcd7c4;font-size:.96rem}
+  .route .towns{margin-top:.7rem;font-size:.9rem;color:#cfe0c2}
+  .delivery-terms{display:flex;flex-wrap:wrap;gap:1.4rem 2.2rem;margin-top:1.8rem;padding-top:1.6rem;border-top:1px solid rgba(247,242,231,.16)}
+  .term b{display:block;font-family:'Fraunces',serif;font-size:1.35rem;color:#fff}
+  .term span{font-size:.9rem;color:#cfe0c2}
+
+  /* ---------- Standing order ---------- */
+  .perks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  @media(max-width:720px){.perks-grid{grid-template-columns:1fr}}
+  .perk{display:grid;grid-template-columns:auto 1fr;gap:1rem;background:var(--cream-deep);border-radius:var(--radius);padding:1.4rem 1.5rem;border:1px solid var(--line)}
+  .perk .n{font-family:'Fraunces',serif;font-weight:700;font-size:1.6rem;color:var(--accent-ink);line-height:1}
+  .perk h3{font-size:1.15rem;margin-bottom:.2rem}
+  .perk p{font-size:.94rem;color:var(--ink-soft)}
+
+  /* ---------- Order / CTA band ---------- */
+  .order{background:var(--cream-deep)}
+  .order-card{background:var(--forest-deep);color:var(--cream);border-radius:22px;padding:3rem 2.2rem;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .order-card h2{color:#fff;font-size:clamp(2rem,4vw,2.9rem);margin-bottom:.7rem}
+  .order-card p{color:#dcd7c4;max-width:52ch;margin:0 auto 1.7rem;font-size:1.08rem}
+  .order-phone{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3rem);color:var(--harvest);font-weight:700;display:inline-block;margin:.4rem 0 1.4rem}
+  .order-phone:hover{color:#fff}
+  .order-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:760px;margin:2rem auto 0;text-align:left}
+  @media(max-width:640px){.order-steps{grid-template-columns:1fr}}
+  .step{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.14);border-radius:14px;padding:1.1rem 1.2rem}
+  .step .s{font-family:'Fraunces',serif;color:var(--gold);font-weight:700;font-size:1.05rem}
+  .step b{display:block;color:#fff;margin:.2rem 0}
+  .step p{color:#cfc9b6;font-size:.88rem;margin:0;max-width:none}
+  /* ---------- Order form (dark card → light fields for AA contrast) ---------- */
+  .order-form{max-width:560px;margin:1.4rem auto 0;text-align:left;display:grid;gap:.9rem}
+  .order-form .ff{display:grid;gap:.3rem}
+  .order-form label{font-size:.85rem;font-weight:600;color:#e9e2cf}
+  .order-form input,.order-form select,.order-form textarea{font:inherit;padding:.7em .9em;border-radius:10px;border:1px solid rgba(247,242,231,.28);background:rgba(247,242,231,.96);color:var(--ink)}
+  .order-form input:focus-visible,.order-form select:focus-visible,.order-form textarea:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+  .order-form button{justify-self:start;margin-top:.4rem}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:2.6rem;align-items:center}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr}}
+  .about-portrait{background:linear-gradient(160deg,var(--kraft),var(--sage));border-radius:var(--radius);min-height:340px;display:flex;align-items:flex-end;padding:1.8rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .about-portrait .cap{background:rgba(35,58,41,.82);color:var(--cream);padding:.7rem 1rem;border-radius:12px;font-size:.92rem}
+  .about-portrait .cap b{color:#fff}
+  .about-grid h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:1rem}
+  .about-grid p{color:var(--ink-soft);margin-bottom:1rem;font-size:1.05rem}
+  .about-grid .signoff{font-family:'Fraunces',serif;font-style:italic;color:var(--bark);font-size:1.1rem}
+
+  /* ---------- Contact ---------- */
+  .contact{background:var(--forest);color:var(--cream)}
+  .contact h2{color:#fff}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem}
+  @media(max-width:720px){.contact-grid{grid-template-columns:1fr}}
+  .contact-list{list-style:none;display:grid;gap:1.1rem}
+  .contact-list li{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start}
+  .contact-list .ic{color:var(--harvest);margin-top:.15rem}
+  .contact-list b{color:#fff;display:block}
+  .contact-list a,.contact-list span{color:#dcd7c4}
+  .contact-list a:hover{color:#fff}
+  .who{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.16);border-radius:var(--radius);padding:1.6rem 1.7rem}
+  .who h3{color:#fff;margin-bottom:.7rem}
+  .who ul{list-style:none;display:grid;gap:.5rem}
+  .who li{color:#dcd7c4;display:flex;gap:.55rem;align-items:center;font-size:.98rem}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--forest-deep);color:#bfc7b3;padding:2.4rem 0;font-size:.9rem}
+  .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.2rem;align-items:center}
+  footer a{color:#dcd7c4}
+  footer a:hover{color:#fff}
+  .foot-brand{font-family:'Fraunces',serif;color:var(--cream);font-size:1.1rem}
+  .foot-legal{max-width:var(--maxw);margin:1.4rem auto 0;padding:1.1rem 22px 0;border-top:1px solid rgba(247,242,231,.14);color:#9aa791;font-size:.82rem}
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#grow">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="nav">
+    <a class="brand" href="#top" aria-label="Flag Pond Mushroom Farm home">
+      <svg class="mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="24" cy="24" r="23" fill="#2f4a34"/>
+        <path d="M24 12c-7 0-12 4.6-12 9.3 0 1.2 1 2.1 2.2 2.1h19.6c1.2 0 2.2-.9 2.2-2.1C36 16.6 31 12 24 12z" fill="#e2d3b3"/>
+        <path d="M24 12c-7 0-12 4.6-12 9.3 0 1.2 1 2.1 2.2 2.1h19.6c1.2 0 2.2-.9 2.2-2.1C36 16.6 31 12 24 12z" stroke="#233a29" stroke-width="1.2"/>
+        <rect x="21.4" y="23" width="5.2" height="13" rx="2.4" fill="#f7f2e7"/>
+        <path d="M18 20.5c1.6-1.2 3.4-1.2 5 0M25 20.5c1.6-1.2 3.4-1.2 5 0" stroke="#5f7a4f" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <span>Flag Pond Mushroom Farm
+        <small>Flag Pond, Tennessee</small>
+      </span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#grow">What We Grow</a>
+      <a href="#harvest">The Morning Harvest</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#standing">Standing Orders</a>
+      <a href="#about">About</a>
+    </nav>
+    <!-- PRIMARY CTA — always visible. Points to the order/pricing form (#order); NO public phone. See DEPLOY.md §3 privacy gate. -->
+    <a class="btn btn-primary header-cta" href="#order" aria-label="Request wholesale pricing from Flag Pond Mushroom Farm">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.58 3.6a1 1 0 01-.24 1L6.6 10.8z"/></svg>
+      Order / Get Pricing
+    </a>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" style="padding-top:0">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Fresh · Local · Direct to your kitchen</span>
+        <h1>Gourmet mushrooms, <em>harvested the morning</em> we deliver.</h1>
+        <p class="lead">Small-batch lion's mane, oyster, shiitake and chestnut mushrooms — grown in the mountains near Flag Pond, Tennessee, and cut fresh for chefs, grocers and co-ops across the Tri-Cities and the Asheville corridor.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#order">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.58 3.6a1 1 0 01-.24 1L6.6 10.8z"/></svg>
+            Start an Order
+          </a>
+          <a class="btn btn-ghost" href="#order">Request Wholesale Pricing</a>
+        </div>
+        <p class="hero-note"><span class="dot" aria-hidden="true"></span> Send your weekly list through the form — we reply with pricing and your first delivery.</p>
+      </div>
+      <div class="hero-art">
+        <div class="hero-card">
+          <h3>Fresh from the farm</h3>
+          <ul>
+            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Lion's mane</b> — our flagship. Big, snow-white heads with a crab-and-lobster sweetness.</span></li>
+            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Blue &amp; grey oyster</b> — tender clusters, quick on the flat-top.</span></li>
+            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Golden &amp; pink oyster</b> — showy color that holds on the plate.</span></li>
+            <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Shiitake &amp; chestnut</b> — meaty, deep, kitchen workhorses.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<div class="trust">
+  <div class="wrap">
+    <span><span aria-hidden="true">🌱</span> <b>Cut the morning of delivery</b> — never days-old in a box</span>
+    <span><span aria-hidden="true">🚚</span> <b>Free delivery</b> on orders over $50</span>
+    <span><span aria-hidden="true">🧾</span> <b>Net-14 terms</b> for wholesale accounts</span>
+    <span><span aria-hidden="true">📍</span> <b>Within ~100 miles</b> of Flag Pond, TN</span>
+  </div>
+</div>
+
+<!-- ============ WHAT WE GROW ============ -->
+<section id="grow" class="grow">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What We Grow</span>
+      <h2>Six gourmet mushrooms, grown to order.</h2>
+      <p>We grow a tight, chef-driven lineup so every flush is at its peak. Tell us what your menu needs and we'll grow into it — this is a pull system, not a warehouse.</p>
+    </div>
+    <div class="grid cards">
+
+      <article class="card">
+        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3c-1.6 0-2.4 1-2.4 2.2 0 .5-.6.6-.9.3C7.5 4.6 6 5 5.6 6.3c-.3 1 .3 1.7-.2 2C4 9 3.6 10.6 4.4 11.6c.6.8.2 1.3-.4 1.7-1.2.8-1.2 2.6 0 3.4.6.4 1 .9.4 1.7-.8 1 0 2.6 1.2 2.7.6.1 1 .5.9 1.2-.2 1.3 1 2.4 2.3 2.1" stroke="#2f4a34" stroke-width="1.3" stroke-linecap="round"/><path d="M12 3c1.6 0 2.4 1 2.4 2.2 0 .5.6.6.9.3 1.2-.9 2.7-.5 3.1.8.3 1-.3 1.7.2 2 1.4.7 1.8 2.3 1 3.3-.6.8-.2 1.3.4 1.7 1.2.8 1.2 2.6 0 3.4-.6.4-1 .9-.4 1.7.8 1 0 2.6-1.2 2.7-.6.1-1 .5-.9 1.2.2 1.3-1 2.4-2.3 2.1" stroke="#2f4a34" stroke-width="1.3" stroke-linecap="round"/><path d="M12 14v7" stroke="#b3611f" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Lion's Mane <span class="flag">Flagship</span></h3>
+        <p>Big, snow-white pom-pom heads with a sweet, seafood-like flavor — pan-seared like a scallop or pulled like crab. Our signature crop and the one chefs ask for by name.</p>
+        <p class="use">Great for: crab-cake swaps, steak-style medallions, vegan "lobster" rolls.</p>
+      </article>
+
+      <article class="card">
+        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="9" rx="9" ry="5.5" fill="#8ba97a"/><path d="M12 14v6" stroke="#5b4632" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9c2 1.5 12 1.5 14 0" stroke="#233a29" stroke-width="1.1"/></svg></div>
+        <h3>Blue &amp; Grey Oyster</h3>
+        <p>Tender, fast-cooking clusters with a mild, savory bite. The dependable everyday oyster — beautiful sautéed, roasted, or crisped on a flat-top.</p>
+        <p class="use">Great for: sautés, tacos, grain bowls, "fried oyster mushroom" apps.</p>
+      </article>
+
+      <article class="card">
+        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="9" rx="9" ry="5.5" fill="#d98a34"/><path d="M12 14v6" stroke="#5b4632" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9c2 1.5 12 1.5 14 0" stroke="#c1741f" stroke-width="1.1"/></svg></div>
+        <h3>Golden &amp; Pink Oyster</h3>
+        <p>Sunburst yellow and coral pink, with a slightly deeper, almost bacon-y note when seared hard. The color that makes a plate — or a market display — pop.</p>
+        <p class="use">Great for: specials, farmers-market color, seasonal plating.</p>
+      </article>
+
+      <article class="card">
+        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="8.5" rx="8" ry="5" fill="#6b5334"/><path d="M12 13v7" stroke="#3f3120" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="12" cy="8.5" rx="8" ry="5" stroke="#3f3120" stroke-width="1"/></svg></div>
+        <h3>Shiitake</h3>
+        <p>Meaty caps with a rich, umami depth that stands up to any protein — the classic gourmet mushroom, grown fresh instead of shipped in dried.</p>
+        <p class="use">Great for: broths, braises, stir-fry, mushroom "bacon".</p>
+      </article>
+
+      <article class="card">
+        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="8.5" rx="7.5" ry="4.6" fill="#a9743a"/><path d="M12 12.6V20" stroke="#5b4632" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="12" cy="8.5" rx="7.5" ry="4.6" stroke="#5b4632" stroke-width="1"/></svg></div>
+        <h3>Chestnut</h3>
+        <p>Firm little caps on slender stems with a nutty crunch that holds its texture when cooked. A kitchen workhorse that keeps its shape and bite.</p>
+        <p class="use">Great for: roasting whole, pasta, pizza, hearty sides.</p>
+      </article>
+
+      <article class="card">
+        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" fill="#efe6d2" stroke="#5b4632" stroke-width="1.2"/><path d="M8 9h8M8 12h8M8 15h5" stroke="#5b4632" stroke-width="1.3" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="#b3611f" opacity=".85"/></svg></div>
+        <h3>Dried Lion's Mane</h3>
+        <p>Our flagship, dehydrated at the farm for a long shelf life and concentrated flavor. Perfect for retail bags, off-season menus, teas and pantry stock.</p>
+        <p class="use">Great for: grocery shelf, powders, rehydrated for soups &amp; sauces.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE MORNING HARVEST STORY ============ -->
+<section id="harvest">
+  <div class="wrap">
+    <div class="story-grid">
+      <div>
+        <span class="eyebrow">The Fresh-Morning Harvest</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin:.5rem 0 1rem">We don't ship it. We cut it and drive it to you.</h2>
+        <p style="color:var(--ink-soft);font-size:1.06rem;margin-bottom:1.4rem">Most "fresh" mushrooms on a kitchen's back dock are already three, four, five days off the block — trucked through a distributor, sweating in a case. Ours are cut the same morning they reach your door. That's the whole idea, and it's why it tastes different.</p>
+        <ul class="timeline">
+          <li><span class="time">Before dawn</span><div><b>We harvest</b><p>John walks the grow room at first light and cuts only what's ordered and at its peak that day.</p></div></li>
+          <li><span class="time">Morning</span><div><b>We pack cold</b><p>Straight into clean, breathable packaging — no long cold-chain, no middle-man warehouse.</p></div></li>
+          <li><span class="time">Same day</span><div><b>We deliver</b><p>Into your kitchen or cooler within hours, on a set weekly route you can count on.</p></div></li>
+        </ul>
+      </div>
+      <div class="photo-block">
+        <span class="spores" aria-hidden="true"></span>
+        <div style="position:relative">
+          <div class="big">Hours,<br>not days.</div>
+          <p>Fresher mushrooms last longer on your shelf, hold better on the plate, and cut your spoilage. Freshness isn't a slogan here — it's the delivery schedule.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERY ============ -->
+<section id="delivery" class="delivery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--gold)">Delivery Cadence</span>
+      <h2>Two set routes, every week.</h2>
+      <p>We run the same days each week so your kitchen can plan around them. Order by the day before your route and we'll grow and cut to match.</p>
+    </div>
+    <div class="route-grid">
+      <div class="route">
+        <div class="day">Tuesdays</div>
+        <h3>North — Tri-Cities, TN</h3>
+        <p>Up through Unicoi County into the Tri-Cities: restaurants, grocers, co-ops and food hubs on the northern route.</p>
+        <p class="towns">Erwin · Johnson City · Kingsport · Bristol &amp; nearby</p>
+      </div>
+      <div class="route">
+        <div class="day">Thursdays</div>
+        <h3>South — Asheville Corridor</h3>
+        <p>Down I-26 into the Asheville corridor — about fifty minutes from the farm — serving the western North Carolina kitchens.</p>
+        <p class="towns">Weaverville · Asheville · Black Mountain &amp; nearby</p>
+      </div>
+    </div>
+    <div class="delivery-terms">
+      <div class="term"><b>~100 mi</b><span>Delivery radius around Flag Pond, TN</span></div>
+      <div class="term"><b>Free over $50</b><span>Delivery is on us above the minimum</span></div>
+      <div class="term"><b>Net-14</b><span>Standard wholesale invoicing terms</span></div>
+      <div class="term"><b>Same-week</b><span>Order by the day before your route</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STANDING ORDERS ============ -->
+<section id="standing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Standing Weekly Orders</span>
+      <h2>Put your kitchen first in line.</h2>
+      <p>Because we grow to order, the accounts that commit to a weekly standing order get the best of the farm — locked pricing and first claim on every harvest.</p>
+    </div>
+    <div class="perks-grid">
+      <div class="perk"><span class="n">1</span><div><h3>Locked pricing</h3><p>Your per-pound price is set and held for the season — no week-to-week surprises when you're costing a menu.</p></div></div>
+      <div class="perk"><span class="n">2</span><div><h3>First claim on harvest</h3><p>Standing orders are grown and reserved before any open inventory. When a crop runs tight, you're covered first.</p></div></div>
+      <div class="perk"><span class="n">3</span><div><h3>Grown to your numbers</h3><p>We plant to your standing quantities, so what you need is already coming out of the room — not something we hope to have.</p></div></div>
+      <div class="perk"><span class="n">4</span><div><h3>One less thing to chase</h3><p>Set it once and it arrives on your route day, every week. Adjust anytime with a quick call.</p></div></div>
+    </div>
+    <p style="margin-top:1.8rem;font-size:1.02rem;color:var(--ink-soft)">Want to set up a standing order? <a href="#order" style="font-weight:700;color:var(--accent-ink)">Send us your weekly list</a> and we'll lock in your pricing.</p>
+  </div>
+</section>
+
+<!-- ============ ORDER / WHOLESALE PRICING ============ -->
+<section id="order" class="order">
+  <div class="wrap">
+    <div class="order-card">
+      <span class="eyebrow" style="color:var(--gold)">How to Order</span>
+      <h2>Request wholesale pricing or start an order.</h2>
+      <p>Tell us what your kitchen needs and we'll reply with wholesale pricing and your first delivery. We grow to order, so every request helps us plan the harvest.</p>
+      <form class="order-form" name="wholesale" method="POST" action="__SET_FORM_ENDPOINT__" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="wholesale">
+        <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+        <div class="ff"><label for="f-name">Your name</label><input id="f-name" name="name" required></div>
+        <div class="ff"><label for="f-biz">Business / kitchen</label><input id="f-biz" name="business" required></div>
+        <div class="ff"><label for="f-email">Email</label><input id="f-email" type="email" name="email" required></div>
+        <div class="ff"><label for="f-phone">Phone (optional)</label><input id="f-phone" type="tel" name="phone"></div>
+        <div class="ff"><label for="f-route">Route day</label><select id="f-route" name="route"><option>Tuesday — Tri-Cities (north)</option><option>Thursday — Asheville corridor (south)</option><option>Not sure yet</option></select></div>
+        <div class="ff"><label for="f-list">What you'd like</label><textarea id="f-list" name="list" rows="3" placeholder="Which mushrooms, rough weekly quantity…"></textarea></div>
+        <button class="btn btn-primary" type="submit">Request Wholesale Pricing</button>
+      </form>
+      <div class="order-steps">
+        <div class="step"><span class="s">Step 1</span><b>Tell us your list</b><p>Which mushrooms, roughly how much, and which route day works — Tuesday north or Thursday south.</p></div>
+        <div class="step"><span class="s">Step 2</span><b>We confirm &amp; price</b><p>We reply to confirm quantities, wholesale pricing and your first delivery. Net-14 for accounts.</p></div>
+        <div class="step"><span class="s">Step 3</span><b>Fresh on your route day</b><p>Cut the morning of delivery and dropped at your door — free over $50.</p></div>
+      </div>
+      <p style="margin-top:1.8rem;font-size:.94rem;color:#cfc9b6">Restaurants · grocers · co-ops · food hubs — wholesale &amp; direct-to-kitchen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-portrait">
+        <div class="cap"><b>John Oliver</b><br>Grower · Flag Pond, Tennessee</div>
+      </div>
+      <div>
+        <span class="eyebrow">About the Farm</span>
+        <h2>A new farm, an old promise: fresh and reliable.</h2>
+        <p>Flag Pond Mushroom Farm is a small growing operation tucked in the mountains of Unicoi County, Tennessee, just north of the North Carolina line — built and run by John Oliver, one clean flush at a time.</p>
+        <p>We're new, and we're not going to pretend otherwise. What we offer isn't a decade of awards; it's something a lot of kitchens have trouble finding: mushrooms that are genuinely fresh, a grower who actually calls you back, and a delivery day you can set your prep list by. When you order from us, you're talking to the person who grew it.</p>
+        <p>Everything we grow is cut here, by hand, the morning it goes to you. That's a promise we can actually keep — and it's the whole reason the farm exists.</p>
+        <p class="signoff">— John, Flag Pond Mushroom Farm</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--gold)">Contact</span>
+      <h2>Let's get you on a route.</h2>
+    </div>
+    <div class="contact-grid">
+      <ul class="contact-list">
+        <li>
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.58 3.6a1 1 0 01-.24 1L6.6 10.8z"/></svg></span>
+          <div><b>Order Line</b><span>Dedicated order line — coming soon</span><br><span style="font-size:.85rem">For now, <a href="#order">send your list through the order form</a> and we'll reply with pricing.</span></div>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></svg></span>
+          <div><b>Where We Grow</b><span>Flag Pond, Tennessee · Unicoi County<br>About 50 minutes north of Asheville via I-26</span></div>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8"/></svg></span>
+          <div><b>Delivery Days</b><span>Tuesdays — Tri-Cities, TN (north)<br>Thursdays — Asheville corridor (south)</span></div>
+        </li>
+      </ul>
+      <div class="who">
+        <h3>Who we serve</h3>
+        <ul>
+          <li><span aria-hidden="true">🍽️</span> Restaurants &amp; chefs</li>
+          <li><span aria-hidden="true">🛒</span> Grocers &amp; specialty markets</li>
+          <li><span aria-hidden="true">🤝</span> Co-ops</li>
+          <li><span aria-hidden="true">📦</span> Food hubs &amp; distributors</li>
+        </ul>
+        <p style="color:#cfc9b6;font-size:.92rem;margin-top:1rem">Wholesale and direct-to-kitchen, within about 100 miles of the farm. Standing weekly accounts get locked pricing and first claim on every harvest.</p>
+        <a class="btn btn-primary" href="#order" style="margin-top:1.2rem">Request Wholesale Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-brand">Flag Pond Mushroom Farm</div>
+      <div>Fresh gourmet mushrooms · Flag Pond, TN · Unicoi County</div>
+    </div>
+    <div style="text-align:right">
+      <a href="#order" style="font-weight:700">Request wholesale pricing</a><br>
+      <span>Tuesdays north · Thursdays south · Free over $50 · Net-14</span>
+    </div>
+  </div>
+  <div class="foot-legal">
+    &copy; <span id="yr">2026</span> Flag Pond Mushroom Farm · Flag Pond, Tennessee
+  </div>
+</footer>
+
+<script>
+  // Keep the footer year current. Degrades to the hardcoded year above.
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Order-form safety guard. Until a live endpoint is wired (see DEPLOY.md §6), the form
+  // action is the placeholder "__SET_FORM_ENDPOINT__" — POSTing to it would 404 and kill
+  // the primary CTA. Until a real https endpoint is set, confirm gracefully instead of
+  // submitting. Once action is a real https URL, this guard steps aside automatically.
+  (function () {
+    var form = document.querySelector('form.order-form');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      var action = form.getAttribute('action') || '';
+      var wired = /^https?:\/\//i.test(action) && action.indexOf('__SET_FORM_ENDPOINT__') === -1;
+      if (wired) return; // real endpoint configured — let the browser submit normally
+      e.preventDefault();
+      var raw = (form.querySelector('#f-name') || {}).value || '';
+      var name = raw.replace(/[<>&]/g, '').trim().slice(0, 60);
+      var note = document.createElement('div');
+      note.setAttribute('role', 'status');
+      note.style.cssText = 'background:rgba(247,242,231,.10);border:1px solid rgba(247,242,231,.28);border-radius:12px;padding:1.15rem 1.25rem;color:#f7f2e7;font-size:1.02rem;line-height:1.55';
+      note.innerHTML = '<b>Thanks' + (name ? ', ' + name : '') + '!</b><br>' +
+        'Your list is ready to go. Online ordering isn’t switched on for this preview yet — ' +
+        'when the site launches, this form sends your order straight to the farm.';
+      form.replaceWith(note);
+      note.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
