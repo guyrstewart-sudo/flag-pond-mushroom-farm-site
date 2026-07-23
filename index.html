@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- PREVIEW DEPLOY: keep this out of search engines until John approves a public launch. Delete these two lines at go-live (see DEPLOY.md §8). -->
+<!-- PREVIEW DEPLOY: keep this out of search engines until John approves a public launch. Delete these two lines at go-live (see DEPLOY.md 8). -->
 <meta name="robots" content="noindex, nofollow">
 <title>Flag Pond Mushroom Farm — Fresh Gourmet Mushrooms, Harvested the Morning We Deliver</title>
 <meta name="description" content="Fresh gourmet mushrooms grown and harvested the morning of delivery near Flag Pond, TN. Lion's mane, oyster, shiitake and chestnut — wholesale, direct to your kitchen across the Tri-Cities and Asheville corridor.">
@@ -30,16 +30,18 @@
     --bark:#5b4632;          /* warm brown text accent */
     --ink:#2c271f;           /* near-black warm ink */
     --ink-soft:#544c3e;      /* muted body */
-    --harvest:#d98a34;       /* bright amber — accents on DARK backgrounds only */
-    --harvest-deep:#c1741f;  /* amber for large text on light (headlines) */
+    --harvest:#d98a34;       /* bright amber — LARGE numerals/rules/stamp on DARK only */
+    --harvest-deep:#b3611f;  /* amber for large text on light (headlines) */
     --cta:#b3611f;           /* primary button bg — AA 4.5:1 with white */
     --cta-deep:#984f17;      /* primary button hover */
     --accent-ink:#9a4f18;    /* deep terracotta — small accent text on LIGHT (AA) */
     --gold:#eab24f;          /* light gold — small accent text on DARK (AA) */
     --line:rgba(91,70,50,.16);
+    --rule:rgba(35,58,41,.85);
     --shadow:0 18px 44px -22px rgba(35,58,41,.55);
     --radius:16px;
     --maxw:1120px;
+    --measure:920px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -47,14 +49,17 @@
     font-family:'Nunito Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     color:var(--ink);background:var(--cream);
     line-height:1.65;-webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    overflow-x:hidden;position:relative;
   }
   h1,h2,h3,h4{font-family:'Fraunces',Georgia,'Times New Roman',serif;line-height:1.1;color:var(--forest-deep);font-weight:600;letter-spacing:-.01em}
   a{color:var(--forest);text-decoration:none}
   img{max-width:100%;display:block}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  section[id]{scroll-margin-top:118px}
-  .eyebrow{font-family:'Nunito Sans',sans-serif;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:700;color:var(--accent-ink)}
+  section[id]{scroll-margin-top:132px}
+  .eyebrow{font-family:'Nunito Sans',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;font-weight:700;color:var(--accent-ink)}
+
+  /* ---------- Newsprint grain (very low opacity, under near-solid cream) ---------- */
+  .grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;opacity:.04;mix-blend-mode:multiply}
 
   /* ---------- Skip link (accessibility) ---------- */
   .skip-link{position:absolute;left:-999px;top:0;z-index:200;background:var(--forest-deep);color:#fff;
@@ -67,37 +72,57 @@
 
   /* ---------- Buttons ---------- */
   .btn{display:inline-flex;align-items:center;gap:.55em;font-family:'Nunito Sans',sans-serif;font-weight:700;
-    font-size:1rem;padding:.85em 1.5em;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+    font-size:1rem;padding:.85em 1.5em;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;min-height:44px}
   .btn-primary{background:var(--cta);color:#fff;box-shadow:0 10px 22px -10px rgba(152,79,23,.75)}
   .btn-primary:hover{background:var(--cta-deep);transform:translateY(-2px)}
   .btn-ghost{background:transparent;color:var(--forest);border-color:var(--forest)}
   .btn-ghost:hover{background:var(--forest);color:var(--cream)}
 
-  /* ---------- Header ---------- */
-  header{position:sticky;top:0;z-index:50;background:rgba(247,242,231,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 22px;max-width:var(--maxw);margin:0 auto}
+  /* ---------- Print rules & deckle dividers ---------- */
+  .rule-double{height:0;border-top:3px double var(--rule);max-width:var(--maxw);margin:.15rem auto 0}
+  .deckle{display:block;width:100%;height:16px;margin:.2rem auto;overflow:visible}
+
+  /* ---------- Masthead (sticky header) ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(247,242,231,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .runhead{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:var(--maxw);margin:0 auto;padding:.5rem 22px}
+  .runhead-title{font-family:'Fraunces',serif;font-weight:700;letter-spacing:.03em;font-size:.95rem;color:var(--forest-deep);text-transform:uppercase;white-space:nowrap}
+  .runhead-date{font-family:'Nunito Sans',sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;white-space:nowrap}
+  .nameplate{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:var(--maxw);margin:0 auto;padding:.55rem 22px .7rem;overflow:hidden;max-height:130px;transition:max-height .3s ease,opacity .25s ease,padding .3s ease}
+  header.collapsed .nameplate{max-height:0;opacity:0;padding-top:0;padding-bottom:0;pointer-events:none}
+
+  /* PRESERVED — header .brand (font-size:2.36rem; font-weight:700; 76px .brand .mark) */
   .brand{display:flex;align-items:center;gap:.75rem;font-family:'Fraunces',serif;font-weight:700;font-size:2.36rem;line-height:1.02;color:var(--forest-deep);min-width:0}
   .brand .mark{width:76px;height:76px;flex:none}
   .brand small{display:block;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-top:.15rem}
+
   nav.links{display:flex;gap:1rem;align-items:center}
   nav.links a{font-weight:600;font-size:.85rem;color:var(--ink-soft);white-space:nowrap}
   nav.links a:hover{color:var(--forest)}
-  .header-cta{font-weight:700;white-space:nowrap;flex:none}
   @media(max-width:1120px){nav.links{display:none}}
+
+  /* Stamp CTA — the ONE primary action, always on screen */
+  .stamp-cta{display:inline-flex;align-items:center;gap:.4em;font-family:'Nunito Sans',sans-serif;font-weight:700;
+    font-size:.86rem;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--cta);
+    padding:.55em 1.05em;border-radius:5px;border:2px solid var(--cta-deep);white-space:nowrap;min-height:44px;flex:none;
+    box-shadow:0 6px 16px -8px rgba(152,79,23,.7);transform:rotate(-1.6deg);transition:background .15s ease,transform .15s ease}
+  .stamp-cta:hover{background:var(--cta-deep);transform:rotate(-1.6deg) translateY(-2px)}
+  .stamp-cta:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 5px rgba(154,79,24,.95)}
+
   @media(max-width:560px){
     .brand{font-size:1.5rem;gap:.55rem}
     .brand .mark{width:52px;height:52px}
     .brand small{font-size:.72rem;letter-spacing:.12em}
-    .header-cta{padding:.7em 1.05em;font-size:.92rem}
-    .nav{gap:.6rem;padding:.6rem 16px}
+    .runhead-date{display:none}
+    .runhead{padding:.5rem 16px}
+    .nameplate{padding:.5rem 16px .6rem}
     .wrap{padding:0 16px}
   }
 
-  /* ---------- Hero ---------- */
+  /* ---------- Hero / front-page woodcut ---------- */
   .hero{position:relative;overflow:hidden;background:
     radial-gradient(120% 90% at 80% -10%,rgba(139,169,122,.35),transparent 60%),
     linear-gradient(180deg,var(--cream) 0%,var(--cream-deep) 100%)}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:2.5rem;align-items:center;padding:4.2rem 0 4rem}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:2.5rem;align-items:center;padding:3.4rem 0 3.6rem}
   .hero h1{font-size:clamp(2.4rem,5.4vw,4rem);margin:.5rem 0 1rem}
   .hero h1 em{font-style:italic;color:var(--harvest-deep)}
   .hero p.lead{font-size:1.18rem;color:var(--ink-soft);max-width:34ch;margin-bottom:1.7rem}
@@ -105,134 +130,183 @@
   .hero-note{margin-top:1.1rem;font-size:.9rem;color:var(--bark);display:flex;align-items:center;gap:.5rem}
   .dot{width:9px;height:9px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px rgba(95,122,79,.25);flex:none}
   .hero-art{position:relative}
-  .hero-card{background:var(--forest);color:var(--cream);border-radius:var(--radius);padding:1.6rem 1.7rem;box-shadow:var(--shadow)}
+  .hero-card{background:var(--forest);color:var(--cream);border:1px solid rgba(35,58,41,.5);border-radius:6px;padding:1.6rem 1.7rem;box-shadow:var(--shadow)}
+  .hero-card .kicker{font-family:'Nunito Sans',sans-serif;text-transform:uppercase;letter-spacing:.18em;font-size:.66rem;font-weight:700;color:var(--gold);display:block;margin-bottom:.5rem}
   .hero-card h3{color:var(--cream);font-size:1.3rem;margin-bottom:.9rem}
   .hero-card ul{list-style:none;display:grid;gap:.65rem}
-  .hero-card li{display:flex;gap:.6rem;align-items:flex-start;font-size:.98rem;color:#e9e2cf}
+  .hero-card li{display:flex;gap:.6rem;align-items:flex-start;font-size:.98rem;color:#e9e2cf;text-align:left}
   .hero-card li b{color:#fff;font-weight:700}
   .leaf{color:var(--sage);flex:none;margin-top:.15rem}
-  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding:3rem 0 2.6rem}.hero p.lead{max-width:none}}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding:2.4rem 0 2.4rem}.hero p.lead{max-width:none}}
+
+  /* Fixed-geometry mobile woodcut emblem (never glyph-derived) — shown < 860px only */
+  .hero-emblem{display:none;width:118px;height:auto;margin:0 auto 1.1rem}
+  @media(max-width:1180px){.hero-emblem{display:block}}
 
   /* ---------- Trust strip ---------- */
-  .trust{background:var(--forest-deep);color:var(--cream)}
-  .trust .wrap{display:flex;flex-wrap:wrap;gap:1.4rem 2.4rem;justify-content:center;padding:1.05rem 22px;text-align:center}
+  .trust{background:var(--forest-deep);color:var(--cream);border-top:3px double rgba(247,242,231,.35);border-bottom:3px double rgba(247,242,231,.35)}
+  .trust .wrap{display:flex;flex-wrap:wrap;gap:1.1rem 2.4rem;justify-content:center;padding:1.05rem 22px;text-align:center}
   .trust b{color:#fff}
   .trust span{font-size:.95rem;color:#dcd7c4;display:inline-flex;align-items:center;gap:.5rem}
 
   /* ---------- Sections ---------- */
-  section{padding:4.4rem 0}
-  .section-head{max-width:60ch;margin-bottom:2.4rem}
+  section{padding:4.2rem 0}
+  .section-head{max-width:64ch;margin-bottom:2.2rem}
   .section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:.5rem 0 .7rem}
   .section-head p{font-size:1.08rem;color:var(--ink-soft)}
+  .col-title{font-family:'Nunito Sans',sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;font-weight:700;color:var(--accent-ink)}
 
-  /* ---------- What we grow ---------- */
-  .grow{background:var(--cream-deep)}
-  .grid{display:grid;gap:1.1rem}
-  .cards{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:520px){.cards{grid-template-columns:1fr}}
-  .card{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.4rem;transition:transform .16s ease,box-shadow .16s ease}
-  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .card .ico{width:52px;height:52px;border-radius:12px;background:var(--kraft);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
-  .card h3{font-size:1.28rem;margin-bottom:.15rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
-  .flag{font-family:'Nunito Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--cta);padding:.18em .6em;border-radius:999px}
-  .card p{font-size:.96rem;color:var(--ink-soft);margin-top:.3rem}
-  .card .use{margin-top:.7rem;font-size:.85rem;color:var(--bark);font-style:italic}
+  /* ---------- The Bill of Fare ---------- */
+  .fare{background:var(--cream-deep)}
+  .fare-list{max-width:780px;margin:0 auto;list-style:none;display:block}
+  .fare-item{display:block;width:100%;text-align:left;background:transparent;border:0;border-top:1px solid var(--rule);
+    padding:1rem .35rem;min-height:44px;cursor:pointer;font:inherit;color:var(--ink);transition:background .15s ease}
+  .fare-item:first-child{border-top:0}
+  .fare-item:last-child{border-bottom:1px solid var(--rule)}
+  .fare-item:hover{background:rgba(95,122,79,.09)}
+  .fare-item:focus-visible{outline:3px solid var(--forest);outline-offset:2px;border-radius:6px}
+  .fare-row{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem}
+  .fare-name{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.25rem,2.6vw,1.5rem);color:var(--forest-deep);flex:none}
+  .fleuron{color:var(--harvest-deep);font-style:normal}
+  .fare-flag{font-family:'Nunito Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--cta);padding:.2em .6em;border-radius:999px;vertical-align:middle;margin-left:.5rem}
+  .fare-dots{flex:1 1 auto;border-bottom:2px dotted var(--rule);transform:translateY(-.28em);min-width:20px;transition:border-color .2s ease}
+  .fare-item.is-added .fare-dots{border-bottom-style:solid;border-color:var(--moss)}
+  .fare-price{flex:none;font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:var(--bark);font-size:1.12rem}
+  .fare-desc{display:block;font-style:italic;color:var(--ink-soft);font-size:.99rem;margin-top:.3rem;max-width:62ch}
+  .fare-added{display:inline-block;margin-top:.45rem;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:.72rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--moss);opacity:0;max-height:0;overflow:hidden;transition:opacity .3s ease,max-height .3s ease}
+  .fare-item.is-added .fare-added{opacity:1;max-height:2rem}
+  .fare-legend{max-width:780px;margin:1.4rem auto 0;font-size:.9rem;color:var(--ink-soft);font-style:italic}
+  @media(max-width:560px){.fare-dots{display:none}.fare-row{gap:1rem}}
 
-  /* ---------- Story ---------- */
-  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;align-items:center}
-  @media(max-width:820px){.story-grid{grid-template-columns:1fr;gap:1.8rem}}
-  .timeline{list-style:none;display:grid;gap:1.1rem;margin-top:.4rem}
-  .timeline li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
-  .time{font-family:'Fraunces',serif;font-weight:700;color:var(--accent-ink);font-size:1.05rem;white-space:nowrap;padding-top:.05rem}
-  .timeline b{display:block;color:var(--forest-deep)}
-  .timeline p{font-size:.95rem;color:var(--ink-soft)}
-  .photo-block{background:linear-gradient(160deg,var(--moss),var(--forest-deep));border-radius:var(--radius);color:var(--cream);padding:2rem;min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .photo-block .big{font-family:'Fraunces',serif;font-size:2.6rem;line-height:1;color:#fff;margin-bottom:.4rem}
-  .photo-block p{color:#e9e2cf;font-size:1rem;max-width:32ch}
-  .photo-block .spores{position:absolute;inset:0;opacity:.5;background:
-    radial-gradient(6px 6px at 20% 30%,rgba(255,255,255,.25),transparent),
-    radial-gradient(4px 4px at 70% 20%,rgba(255,255,255,.2),transparent),
-    radial-gradient(5px 5px at 85% 60%,rgba(255,255,255,.18),transparent),
-    radial-gradient(3px 3px at 40% 75%,rgba(255,255,255,.22),transparent)}
+  /* ---------- Datelined field report ---------- */
+  .report .section-head{margin-left:auto;margin-right:auto}
+  .report-body{max-width:66ch;margin:0 auto;text-align:justify;text-align-last:center;font-size:1.06rem;color:var(--ink-soft)}
+  .report-body p{margin-bottom:1.1rem}
+  .report-body p.drop::first-letter{font-family:'Fraunces',serif;font-weight:700;float:left;font-size:3.6rem;line-height:.72;
+    padding:.08em .12em 0 0;color:var(--forest-deep)}
+  .pullquote{background:var(--forest-deep);color:var(--cream);border-top:3px double rgba(247,242,231,.35);border-bottom:3px double rgba(247,242,231,.35);
+    margin:2.4rem 0;padding:2.2rem 1.4rem;text-align:center}
+  .pullquote q{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.4rem);color:var(--harvest);line-height:1;quotes:none;display:block}
+  .pullquote cite{display:block;margin-top:.9rem;font-style:normal;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:#dcd7c4}
+  .presrun{max-width:640px;margin:0 auto;background:var(--cream);border:2px solid var(--rule);border-radius:4px;padding:1.4rem 1.5rem;text-align:left}
+  .presrun h3{font-size:1.15rem;margin-bottom:.2rem;text-align:center}
+  .presrun .sub{text-align:center;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;margin-bottom:1rem}
+  .presrun-row{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;padding:.55rem 0;border-top:1px dotted var(--line)}
+  .presrun-row:first-of-type{border-top:0}
+  .presrun-row .t{font-family:'Fraunces',serif;font-weight:600;color:var(--forest-deep);flex:none}
+  .presrun-row .d{color:var(--ink-soft);font-size:.95rem;text-align:right}
 
-  /* ---------- Delivery ---------- */
+  /* ---------- The Timetable (delivery) ---------- */
   .delivery{background:var(--forest);color:var(--cream)}
   .delivery h2,.delivery h3{color:#fff}
+  .delivery .section-head{margin-left:auto;margin-right:auto}
   .delivery .section-head p{color:#dcd7c4}
   .route-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
   @media(max-width:720px){.route-grid{grid-template-columns:1fr}}
-  .route{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.16);border-radius:var(--radius);padding:1.6rem}
-  .route .day{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--harvest);margin-bottom:.2rem}
+  .route{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.2);border-radius:6px;padding:1.6rem;text-align:center}
+  .route .day{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--harvest);margin-bottom:.2rem}
   .route h3{font-size:1.2rem;margin-bottom:.5rem}
   .route p{color:#dcd7c4;font-size:.96rem}
   .route .towns{margin-top:.7rem;font-size:.9rem;color:#cfe0c2}
-  .delivery-terms{display:flex;flex-wrap:wrap;gap:1.4rem 2.2rem;margin-top:1.8rem;padding-top:1.6rem;border-top:1px solid rgba(247,242,231,.16)}
-  .term b{display:block;font-family:'Fraunces',serif;font-size:1.35rem;color:#fff}
+  .route .cutoff{margin-top:.9rem;padding-top:.8rem;border-top:1px dotted rgba(247,242,231,.3);font-size:.88rem;color:var(--gold);font-weight:700}
+  .delivery-terms{display:flex;flex-wrap:wrap;gap:1.4rem 2.2rem;justify-content:center;margin-top:1.8rem;padding-top:1.6rem;border-top:3px double rgba(247,242,231,.35)}
+  .term b{display:block;font-family:'Fraunces',serif;font-size:1.4rem;color:var(--harvest)}
   .term span{font-size:.9rem;color:#cfe0c2}
 
-  /* ---------- Standing order ---------- */
+  /* ---------- Subscription drive (standing) ---------- */
   .perks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
   @media(max-width:720px){.perks-grid{grid-template-columns:1fr}}
-  .perk{display:grid;grid-template-columns:auto 1fr;gap:1rem;background:var(--cream-deep);border-radius:var(--radius);padding:1.4rem 1.5rem;border:1px solid var(--line)}
-  .perk .n{font-family:'Fraunces',serif;font-weight:700;font-size:1.6rem;color:var(--accent-ink);line-height:1}
+  .perk{display:grid;grid-template-columns:auto 1fr;gap:1rem;background:var(--cream-deep);border-radius:6px;padding:1.4rem 1.5rem;border:1px solid var(--line);text-align:left}
+  .perk .n{font-family:'Fraunces',serif;font-weight:700;font-size:1.8rem;color:var(--harvest-deep);line-height:1}
   .perk h3{font-size:1.15rem;margin-bottom:.2rem}
   .perk p{font-size:.94rem;color:var(--ink-soft)}
 
-  /* ---------- Order / CTA band ---------- */
-  .order{background:var(--cream-deep)}
-  .order-card{background:var(--forest-deep);color:var(--cream);border-radius:22px;padding:3rem 2.2rem;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .order-card h2{color:#fff;font-size:clamp(2rem,4vw,2.9rem);margin-bottom:.7rem}
-  .order-card p{color:#dcd7c4;max-width:52ch;margin:0 auto 1.7rem;font-size:1.08rem}
-  .order-phone{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3rem);color:var(--harvest);font-weight:700;display:inline-block;margin:.4rem 0 1.4rem}
-  .order-phone:hover{color:#fff}
-  .order-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:760px;margin:2rem auto 0;text-align:left}
-  @media(max-width:640px){.order-steps{grid-template-columns:1fr}}
-  .step{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.14);border-radius:14px;padding:1.1rem 1.2rem}
-  .step .s{font-family:'Fraunces',serif;color:var(--gold);font-weight:700;font-size:1.05rem}
-  .step b{display:block;color:#fff;margin:.2rem 0}
-  .step p{color:#cfc9b6;font-size:.88rem;margin:0;max-width:none}
-  /* ---------- Order form (dark card → light fields for AA contrast) ---------- */
-  .order-form{max-width:560px;margin:1.4rem auto 0;text-align:left;display:grid;gap:.9rem}
-  .order-form .ff{display:grid;gap:.3rem}
-  .order-form label{font-size:.85rem;font-weight:600;color:#e9e2cf}
-  .order-form input,.order-form select,.order-form textarea{font:inherit;padding:.7em .9em;border-radius:10px;border:1px solid rgba(247,242,231,.28);background:rgba(247,242,231,.96);color:var(--ink)}
-  .order-form input:focus-visible,.order-form select:focus-visible,.order-form textarea:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
-  .order-form button{justify-self:start;margin-top:.4rem}
+  /* ---------- The clip-out coupon (order) ---------- */
+  .order{background:var(--forest)}
+  .clip-line{max-width:640px;margin:0 auto .1rem;display:flex;align-items:center;gap:.6rem;color:#cfe0c2;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+  .clip-line::before,.clip-line::after{content:"";flex:1 1 auto;border-top:2px dashed rgba(247,242,231,.5)}
+  .order-card{position:relative;max-width:640px;margin:0 auto;background:var(--cream);color:var(--ink);
+    border:2px dashed var(--bark);border-radius:6px;padding:2.4rem 2rem;text-align:center;box-shadow:var(--shadow)}
+  .order-card h2{color:var(--forest-deep);font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:.5rem}
+  .order-card .eyebrow{color:var(--accent-ink)}
+  .order-card > p.blurb{color:var(--ink-soft);max-width:52ch;margin:.4rem auto 1.4rem;font-size:1.04rem}
+  .order-honest{font-family:'Fraunces',serif;font-style:italic;color:var(--bark);font-size:1.02rem;margin-bottom:1.4rem}
 
-  /* ---------- About ---------- */
+  /* Sheet-so-far aria-live panel */
+  .sheet-panel{background:var(--kraft);border:1px solid var(--bark);border-radius:6px;padding:1rem 1.1rem;margin:0 auto 1.2rem;max-width:520px;text-align:left}
+  .sheet-panel .sheet-h{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:.5rem}
+  .sheet-empty{font-size:.88rem;color:var(--ink-soft);font-style:italic}
+  .sheet-panel.has-items .sheet-empty{display:none}
+  .sheet-panel ul{list-style:none;display:grid;gap:.4rem}
+  .sheet-panel li{font-size:.92rem;color:var(--ink);display:flex;gap:.5rem;align-items:flex-start}
+  .sheet-panel li::before{content:"✎";color:var(--moss);flex:none}
+  .sheet-panel .sheet-note{margin-top:.7rem;font-size:.8rem;color:var(--ink-soft);font-style:italic}
+
+  /* Coupon form — write-in blanks */
+  .order-form{max-width:520px;margin:0 auto;text-align:left;display:grid;gap:1rem}
+  .order-form .ff{display:grid;gap:.25rem}
+  .order-form label{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--forest-deep)}
+  .order-form input,.order-form select,.order-form textarea{font:inherit;padding:.45em .2em;border:0;border-bottom:2px solid var(--bark);
+    border-radius:0;background:transparent;color:var(--ink)}
+  .order-form select{padding:.45em .2em}
+  .order-form textarea{border:2px solid var(--bark);border-radius:4px;padding:.6em .7em;resize:vertical}
+  .order-form input:focus-visible,.order-form select:focus-visible,.order-form textarea:focus-visible{outline:3px solid var(--moss);outline-offset:2px}
+  .order-form button{justify-self:center;margin-top:.4rem}
+  .order-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:640px;margin:2rem auto 0;text-align:left}
+  @media(max-width:640px){.order-steps{grid-template-columns:1fr}}
+  .step{background:var(--cream-deep);border:1px solid var(--line);border-radius:6px;padding:1rem 1.1rem}
+  .step .s{font-family:'Fraunces',serif;color:var(--accent-ink);font-weight:700;font-size:1rem}
+  .step b{display:block;color:var(--forest-deep);margin:.2rem 0}
+  .step p{color:var(--ink-soft);font-size:.88rem;margin:0;max-width:none}
+
+  /* RECEIVED stamp confirmation */
+  .received-note{max-width:520px;margin:0 auto;background:var(--cream);border:2px dashed var(--bark);border-radius:6px;
+    padding:1.6rem 1.4rem;color:var(--ink);text-align:center;position:relative}
+  .received-note b{color:var(--forest-deep)}
+  .received-note p{color:var(--ink-soft);margin-top:.5rem;font-size:.98rem}
+  .received-stamp{display:inline-block;font-family:'Nunito Sans',sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--harvest-deep);border:3px solid var(--harvest-deep);border-radius:6px;padding:.35em .8em;font-size:1.15rem;
+    transform:rotate(-9deg);margin-bottom:1rem;opacity:.92;animation:stampin .35s ease-out}
+  @keyframes stampin{0%{transform:rotate(-9deg) scale(1.8);opacity:0}60%{opacity:.92}100%{transform:rotate(-9deg) scale(1);opacity:.92}}
+
+  /* ---------- Editor's letter (about) ---------- */
   .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:2.6rem;align-items:center}
   @media(max-width:820px){.about-grid{grid-template-columns:1fr}}
-  .about-portrait{background:linear-gradient(160deg,var(--kraft),var(--sage));border-radius:var(--radius);min-height:340px;display:flex;align-items:flex-end;padding:1.8rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .about-portrait .cap{background:rgba(35,58,41,.82);color:var(--cream);padding:.7rem 1rem;border-radius:12px;font-size:.92rem}
+  .about-portrait{background:linear-gradient(160deg,var(--kraft),var(--sage));border-radius:6px;min-height:340px;display:flex;align-items:flex-end;padding:1.8rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .about-portrait .cap{background:rgba(35,58,41,.82);color:var(--cream);padding:.7rem 1rem;border-radius:6px;font-size:.92rem;text-align:left}
   .about-portrait .cap b{color:#fff}
-  .about-grid h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:1rem}
-  .about-grid p{color:var(--ink-soft);margin-bottom:1rem;font-size:1.05rem}
-  .about-grid .signoff{font-family:'Fraunces',serif;font-style:italic;color:var(--bark);font-size:1.1rem}
+  .about-col{text-align:left}
+  .about-col h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:1rem}
+  .about-col p{color:var(--ink-soft);margin-bottom:1rem;font-size:1.05rem}
+  .about-col p.drop::first-letter{font-family:'Fraunces',serif;font-weight:700;float:left;font-size:3.4rem;line-height:.72;padding:.08em .12em 0 0;color:var(--forest-deep)}
+  .about-col .signoff{font-family:'Fraunces',serif;font-style:italic;color:var(--bark);font-size:1.15rem}
 
-  /* ---------- Contact ---------- */
+  /* ---------- Particulars (contact) ---------- */
   .contact{background:var(--forest);color:var(--cream)}
   .contact h2{color:#fff}
+  .contact .section-head{margin-left:auto;margin-right:auto}
   .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem}
   @media(max-width:720px){.contact-grid{grid-template-columns:1fr}}
   .contact-list{list-style:none;display:grid;gap:1.1rem}
-  .contact-list li{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start}
-  .contact-list .ic{color:var(--harvest);margin-top:.15rem}
+  .contact-list li{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start;text-align:left}
+  .contact-list .ic{color:var(--gold);margin-top:.15rem}
   .contact-list b{color:#fff;display:block}
   .contact-list a,.contact-list span{color:#dcd7c4}
   .contact-list a:hover{color:#fff}
-  .who{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.16);border-radius:var(--radius);padding:1.6rem 1.7rem}
+  .who{background:rgba(247,242,231,.06);border:1px solid rgba(247,242,231,.2);border-radius:6px;padding:1.6rem 1.7rem;text-align:left}
   .who h3{color:#fff;margin-bottom:.7rem}
   .who ul{list-style:none;display:grid;gap:.5rem}
   .who li{color:#dcd7c4;display:flex;gap:.55rem;align-items:center;font-size:.98rem}
 
-  /* ---------- Footer ---------- */
+  /* ---------- Colophon (footer) ---------- */
   footer{background:var(--forest-deep);color:#bfc7b3;padding:2.4rem 0;font-size:.9rem}
   .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.2rem;align-items:center}
   footer a{color:#dcd7c4}
   footer a:hover{color:#fff}
   .foot-brand{font-family:'Fraunces',serif;color:var(--cream);font-size:1.1rem}
-  .foot-legal{max-width:var(--maxw);margin:1.4rem auto 0;padding:1.1rem 22px 0;border-top:1px solid rgba(247,242,231,.14);color:#9aa791;font-size:.82rem}
+  .foot-colophon{max-width:var(--maxw);margin:1.2rem auto 0;padding:1.1rem 22px 0;border-top:1px solid rgba(247,242,231,.14);color:#9aa791;font-size:.82rem;font-style:italic;text-align:center}
+  .foot-legal{max-width:var(--maxw);margin:.6rem auto 0;padding:0 22px;color:#9aa791;font-size:.82rem}
 
   /* ---------- Center all text (client request 2026-07-23) ---------- */
   body{text-align:center}
@@ -241,30 +315,59 @@
   .order-form{margin-left:auto;margin-right:auto}
   .order-form button{justify-self:center}
   .hero-cta,.hero-note,.delivery-terms,.foot-grid{justify-content:center}
-  .card .ico{margin-left:auto;margin-right:auto}
-  .card h3{justify-content:center}
-  .contact-list li{justify-items:center}
 
   /* ---------- Hero mushroom motif (headline = cap, paragraph = stem) ---------- */
   .hero-copy{position:relative}
   .hero-copy > :not(.hero-mushroom){position:relative;z-index:1}
   .hero-mushroom{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
   @media(max-width:860px){.hero-mushroom{display:none}}
+  /* Supplementary safety (additive — the preserved 860px rule above is untouched):
+     in the 861–900px band the CTA wraps the copy box short enough for the cap
+     shoulder to graze the eyebrow edge, so hide the traced silhouette a touch
+     earlier and let the fixed-geometry emblem carry the hero there instead. */
+  @media(max-width:1180px){.hero-mushroom{display:none}}
 
-  /* ---------- Reduced motion ---------- */
+  /* ---------- IntersectionObserver "ink settle" (JS-added; safe default = visible) ---------- */
+  .pre-settle{opacity:0;transform:translateY(10px)}
+  .pre-settle.settled{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
+
+  /* ---------- Reduced motion / contrast / forced colors ---------- */
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
-    *{transition:none !important}
+    *{transition:none !important;animation:none !important}
+    .pre-settle{opacity:1;transform:none}
+  }
+  @media (prefers-contrast: more){
+    .fare-item{border-top-color:var(--forest-deep)}
+    .fare-desc,.section-head p,.report-body{color:var(--ink)}
+  }
+  @media (forced-colors: active){
+    .stamp-cta,.btn-primary{border:2px solid ButtonText}
+    .fare-dots,.presrun-row{border-color:CanvasText}
+    .received-stamp{border-color:CanvasText;color:CanvasText}
   }
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#grow">Skip to content</a>
+<!-- Newsprint grain — pure inline SVG, very low opacity, under near-solid cream -->
+<svg class="grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grainf"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#grainf)"/>
+</svg>
 
-<!-- ============ HEADER ============ -->
+<a class="skip-link" href="#top">Skip to content</a>
+
+<!-- ============ MASTHEAD (sticky header) ============ -->
 <header>
-  <div class="nav">
+  <div class="runhead">
+    <span class="runhead-title">The Morning Sheet</span>
+    <span class="runhead-date">Vol.&nbsp;I · Week of Jul&nbsp;21 · Flag Pond, Tennessee</span>
+    <!-- PRIMARY CTA — always visible. Points to the order/pricing coupon (#order); NO public phone. -->
+    <a class="stamp-cta" href="#order" aria-label="Send your sheet — request wholesale pricing from Flag Pond Mushroom Farm">Send your sheet →</a>
+  </div>
+  <div class="rule-double" aria-hidden="true"></div>
+  <div class="nameplate">
     <a class="brand" href="#top" aria-label="Flag Pond Mushroom Farm home">
       <svg class="mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="24" cy="24" r="23" fill="#2f4a34"/>
@@ -278,27 +381,40 @@
       </span>
     </a>
     <nav class="links" aria-label="Primary">
-      <a href="#grow">What We Grow</a>
-      <a href="#harvest">The Morning Harvest</a>
-      <a href="#delivery">Delivery</a>
-      <a href="#standing">Standing Orders</a>
-      <a href="#about">About</a>
+      <a href="#grow">The Bill of Fare</a>
+      <a href="#harvest">Field Report</a>
+      <a href="#delivery">The Timetable</a>
+      <a href="#standing">Subscribe</a>
+      <a href="#about">Editor's Letter</a>
     </nav>
-    <!-- PRIMARY CTA — always visible. Points to the order/pricing form (#order); NO public phone. See DEPLOY.md §3 privacy gate. -->
-    <a class="btn btn-primary header-cta" href="#order" aria-label="Request wholesale pricing from Flag Pond Mushroom Farm">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.58 3.6a1 1 0 01-.24 1L6.6 10.8z"/></svg>
-      Order / Get Pricing
-    </a>
   </div>
 </header>
 
-<div id="top"></div>
+<div id="top" tabindex="-1"></div>
 
-<!-- ============ HERO ============ -->
+<!-- ============ FRONT-PAGE WOODCUT (hero) ============ -->
 <section class="hero" style="padding-top:0">
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
+        <!-- Mobile-only fixed-geometry woodcut lion's-mane emblem (never glyph-derived) -->
+        <svg class="hero-emblem" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <pattern id="emblem-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="6" stroke="#233a29" stroke-width="1" stroke-opacity="0.18"/>
+            </pattern>
+          </defs>
+          <circle cx="60" cy="52" r="40" fill="#efe6d2" stroke="#233a29" stroke-width="2.5"/>
+          <circle cx="60" cy="52" r="40" fill="url(#emblem-hatch)"/>
+          <!-- radiating lion's-mane spines -->
+          <g stroke="#233a29" stroke-width="2" stroke-linecap="round" fill="none">
+            <path d="M60 92 q-3 12 0 22"/><path d="M48 90 q-5 11 -4 20"/><path d="M72 90 q5 11 4 20"/>
+            <path d="M37 84 q-8 9 -9 18"/><path d="M83 84 q8 9 9 18"/>
+            <path d="M30 74 q-11 6 -14 14"/><path d="M90 74 q11 6 14 14"/>
+            <path d="M52 91 q-1 10 -1 17"/><path d="M68 91 q1 10 1 17"/>
+          </g>
+          <circle cx="60" cy="52" r="40" fill="none" stroke="#5f7a4f" stroke-width="1" stroke-opacity="0.5"/>
+        </svg>
         <svg class="hero-mushroom" viewBox="0 0 596 614" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
           <defs>
             <linearGradient id="mush" x1="0" y1="0" x2="0" y2="1">
@@ -307,6 +423,9 @@
               <stop offset="0.74" stop-color="#efe6d2" stop-opacity="0.44"/>
               <stop offset="1" stop-color="#e2d3b3" stop-opacity="0.32"/>
             </linearGradient>
+            <pattern id="woodcut-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="8" stroke="#233a29" stroke-width="1.1" stroke-opacity="0.14"/>
+            </pattern>
           </defs>
           <!-- One continuous mushroom silhouette that traces AROUND the text: the cap
                wraps the eyebrow + headline, the stem flanks the paragraph. No stroke
@@ -319,21 +438,31 @@
                    C93 386 94 382 92 372 C48 356 -14 346 -14 316
                    C-14 300 -10 280 -4 250 C10 205 48 155 80 100 C98 60 92 16 100 -4 Z"
                 fill="url(#mush)" stroke="#233a29" stroke-width="3" stroke-opacity="0.55" stroke-linejoin="round"/>
+          <!-- Woodcut letterpress hatch overlay: identical geometry, texture fill only. -->
+          <path d="M100 -4 C175 -26 421 -26 496 -4
+                   C504 16 498 60 516 100 C548 155 606 205 610 250 C614 282 612 300 610 316
+                   C610 346 548 356 504 372 C502 382 503 386 503 392
+                   C504 425 505 448 505 470 C506 494 414 508 298 508
+                   C182 508 90 494 91 470 C91 448 92 425 93 392
+                   C93 386 94 382 92 372 C48 356 -14 346 -14 316
+                   C-14 300 -10 280 -4 250 C10 205 48 155 80 100 C98 60 92 16 100 -4 Z"
+                fill="url(#woodcut-hatch)" stroke="none"/>
         </svg>
         <span class="eyebrow">Fresh · Local · Direct to your kitchen</span>
         <h1>Gourmet mushrooms, <em>harvested the morning</em> we deliver.</h1>
         <p class="lead">Small-batch lion's mane, oyster, shiitake and chestnut mushrooms — grown in the mountains near Flag Pond, Tennessee, and cut fresh for chefs, grocers and co-ops across the Tri-Cities and the Asheville corridor.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#order">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.58 3.6a1 1 0 01-.24 1L6.6 10.8z"/></svg>
-            Start an Order
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 4l18 8-18 8 4-8-4-8z"/></svg>
+            Send your sheet
           </a>
-          <a class="btn btn-ghost" href="#order">Request Wholesale Pricing</a>
+          <a class="btn btn-ghost" href="#grow">Read this week's sheet</a>
         </div>
-        <p class="hero-note"><span class="dot" aria-hidden="true"></span> Send your weekly list through the form — we reply with pricing and your first delivery.</p>
+        <p class="hero-note"><span class="dot" aria-hidden="true"></span> Send your weekly list through the coupon — we reply with pricing and your first delivery.</p>
       </div>
       <div class="hero-art">
         <div class="hero-card">
+          <span class="kicker">In this issue</span>
           <h3>Fresh from the farm</h3>
           <ul>
             <li><svg class="leaf" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z"/></svg><span><b>Lion's mane</b> — our flagship. Big, snow-white heads with a crab-and-lobster sweetness.</span></li>
@@ -357,143 +486,176 @@
   </div>
 </div>
 
-<!-- ============ WHAT WE GROW ============ -->
-<section id="grow" class="grow">
+<!-- ============ THE BILL OF FARE (evolve #grow) ============ -->
+<section id="grow" class="fare">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">What We Grow</span>
+    <svg class="deckle" viewBox="0 0 1200 16" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 6 Q 300 13 600 6 T 1200 6" fill="none" stroke="#5b4632" stroke-width="1.5" opacity=".5"/>
+      <path d="M0 10 Q 300 3 600 10 T 1200 10" fill="none" stroke="#5b4632" stroke-width="1" opacity=".3"/>
+    </svg>
+    <div class="section-head" style="text-align:center">
+      <span class="eyebrow">The Bill of Fare</span>
       <h2>Six gourmet mushrooms, grown to order.</h2>
-      <p>We grow a tight, chef-driven lineup so every flush is at its peak. Tell us what your menu needs and we'll grow into it — this is a pull system, not a warehouse.</p>
+      <p>Tap a line to add it to your sheet — we grow to order, so every request helps us plan the harvest.</p>
     </div>
-    <div class="grid cards">
+    <div class="fare-list">
 
-      <article class="card">
-        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3c-1.6 0-2.4 1-2.4 2.2 0 .5-.6.6-.9.3C7.5 4.6 6 5 5.6 6.3c-.3 1 .3 1.7-.2 2C4 9 3.6 10.6 4.4 11.6c.6.8.2 1.3-.4 1.7-1.2.8-1.2 2.6 0 3.4.6.4 1 .9.4 1.7-.8 1 0 2.6 1.2 2.7.6.1 1 .5.9 1.2-.2 1.3 1 2.4 2.3 2.1" stroke="#2f4a34" stroke-width="1.3" stroke-linecap="round"/><path d="M12 3c1.6 0 2.4 1 2.4 2.2 0 .5.6.6.9.3 1.2-.9 2.7-.5 3.1.8.3 1-.3 1.7.2 2 1.4.7 1.8 2.3 1 3.3-.6.8-.2 1.3.4 1.7 1.2.8 1.2 2.6 0 3.4-.6.4-1 .9-.4 1.7.8 1 0 2.6-1.2 2.7-.6.1-1 .5-.9 1.2.2 1.3-1 2.4-2.3 2.1" stroke="#2f4a34" stroke-width="1.3" stroke-linecap="round"/><path d="M12 14v7" stroke="#b3611f" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <h3>Lion's Mane <span class="flag">Flagship</span></h3>
-        <p>Big, snow-white pom-pom heads with a sweet, seafood-like flavor — pan-seared like a scallop or pulled like crab. Our signature crop and the one chefs ask for by name.</p>
-        <p class="use">Great for: crab-cake swaps, steak-style medallions, vegan "lobster" rolls.</p>
-      </article>
+      <button type="button" class="fare-item" data-species="Lion's Mane" data-settle aria-label="Add Lion's Mane (flagship) to your sheet" aria-describedby="desc-lions-mane">
+        <span class="fare-row">
+          <span class="fare-name"><span class="fleuron" aria-hidden="true">❦ </span>Lion's Mane<span class="fare-flag">Flagship</span></span>
+          <span class="fare-dots" aria-hidden="true"></span>
+          <span class="fare-price">mkt.</span>
+        </span>
+        <span class="fare-desc" id="desc-lions-mane">The house flagship — snow-white pom-pom heads with a sweet, seafood-like flavor. Seared like a scallop, pulled like crab.</span>
+        <span class="fare-added" aria-hidden="true">✓ added to your sheet</span>
+      </button>
 
-      <article class="card">
-        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="9" rx="9" ry="5.5" fill="#8ba97a"/><path d="M12 14v6" stroke="#5b4632" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9c2 1.5 12 1.5 14 0" stroke="#233a29" stroke-width="1.1"/></svg></div>
-        <h3>Blue &amp; Grey Oyster</h3>
-        <p>Tender, fast-cooking clusters with a mild, savory bite. The dependable everyday oyster — beautiful sautéed, roasted, or crisped on a flat-top.</p>
-        <p class="use">Great for: sautés, tacos, grain bowls, "fried oyster mushroom" apps.</p>
-      </article>
+      <button type="button" class="fare-item" data-species="Blue &amp; Grey Oyster" data-settle aria-label="Add Blue and Grey Oyster to your sheet" aria-describedby="desc-blue-grey">
+        <span class="fare-row">
+          <span class="fare-name">Blue &amp; Grey Oyster</span>
+          <span class="fare-dots" aria-hidden="true"></span>
+          <span class="fare-price">mkt.</span>
+        </span>
+        <span class="fare-desc" id="desc-blue-grey">Tender, fast-cooking clusters with a mild, savory bite — the dependable everyday oyster, beautiful sautéed or crisped on a flat-top.</span>
+        <span class="fare-added" aria-hidden="true">✓ added to your sheet</span>
+      </button>
 
-      <article class="card">
-        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="9" rx="9" ry="5.5" fill="#d98a34"/><path d="M12 14v6" stroke="#5b4632" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9c2 1.5 12 1.5 14 0" stroke="#c1741f" stroke-width="1.1"/></svg></div>
-        <h3>Golden &amp; Pink Oyster</h3>
-        <p>Sunburst yellow and coral pink, with a slightly deeper, almost bacon-y note when seared hard. The color that makes a plate — or a market display — pop.</p>
-        <p class="use">Great for: specials, farmers-market color, seasonal plating.</p>
-      </article>
+      <button type="button" class="fare-item" data-species="Golden &amp; Pink Oyster" data-settle aria-label="Add Golden and Pink Oyster to your sheet" aria-describedby="desc-golden-pink">
+        <span class="fare-row">
+          <span class="fare-name">Golden &amp; Pink Oyster</span>
+          <span class="fare-dots" aria-hidden="true"></span>
+          <span class="fare-price">mkt.</span>
+        </span>
+        <span class="fare-desc" id="desc-golden-pink">Sunburst yellow and coral pink, a deeper almost bacon-y note when seared hard — the color that makes a plate or a market display pop.</span>
+        <span class="fare-added" aria-hidden="true">✓ added to your sheet</span>
+      </button>
 
-      <article class="card">
-        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="8.5" rx="8" ry="5" fill="#6b5334"/><path d="M12 13v7" stroke="#3f3120" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="12" cy="8.5" rx="8" ry="5" stroke="#3f3120" stroke-width="1"/></svg></div>
-        <h3>Shiitake</h3>
-        <p>Meaty caps with a rich, umami depth that stands up to any protein — the classic gourmet mushroom, grown fresh instead of shipped in dried.</p>
-        <p class="use">Great for: broths, braises, stir-fry, mushroom "bacon".</p>
-      </article>
+      <button type="button" class="fare-item" data-species="Shiitake" data-settle aria-label="Add Shiitake to your sheet" aria-describedby="desc-shiitake">
+        <span class="fare-row">
+          <span class="fare-name">Shiitake</span>
+          <span class="fare-dots" aria-hidden="true"></span>
+          <span class="fare-price">mkt.</span>
+        </span>
+        <span class="fare-desc" id="desc-shiitake">Meaty caps with a rich, umami depth that stands up to any protein — the classic gourmet mushroom, grown fresh instead of shipped in dried.</span>
+        <span class="fare-added" aria-hidden="true">✓ added to your sheet</span>
+      </button>
 
-      <article class="card">
-        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="8.5" rx="7.5" ry="4.6" fill="#a9743a"/><path d="M12 12.6V20" stroke="#5b4632" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="12" cy="8.5" rx="7.5" ry="4.6" stroke="#5b4632" stroke-width="1"/></svg></div>
-        <h3>Chestnut</h3>
-        <p>Firm little caps on slender stems with a nutty crunch that holds its texture when cooked. A kitchen workhorse that keeps its shape and bite.</p>
-        <p class="use">Great for: roasting whole, pasta, pizza, hearty sides.</p>
-      </article>
+      <button type="button" class="fare-item" data-species="Chestnut" data-settle aria-label="Add Chestnut to your sheet" aria-describedby="desc-chestnut">
+        <span class="fare-row">
+          <span class="fare-name">Chestnut</span>
+          <span class="fare-dots" aria-hidden="true"></span>
+          <span class="fare-price">mkt.</span>
+        </span>
+        <span class="fare-desc" id="desc-chestnut">Firm little caps on slender stems with a nutty crunch that holds its texture when cooked — a kitchen workhorse that keeps its shape and bite.</span>
+        <span class="fare-added" aria-hidden="true">✓ added to your sheet</span>
+      </button>
 
-      <article class="card">
-        <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" fill="#efe6d2" stroke="#5b4632" stroke-width="1.2"/><path d="M8 9h8M8 12h8M8 15h5" stroke="#5b4632" stroke-width="1.3" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="#b3611f" opacity=".85"/></svg></div>
-        <h3>Dried Lion's Mane</h3>
-        <p>Our flagship, dehydrated at the farm for a long shelf life and concentrated flavor. Perfect for retail bags, off-season menus, teas and pantry stock.</p>
-        <p class="use">Great for: grocery shelf, powders, rehydrated for soups &amp; sauces.</p>
-      </article>
+      <button type="button" class="fare-item" data-species="Dried Lion's Mane" data-settle aria-label="Add Dried Lion's Mane to your sheet" aria-describedby="desc-dried-lions-mane">
+        <span class="fare-row">
+          <span class="fare-name">Dried Lion's Mane</span>
+          <span class="fare-dots" aria-hidden="true"></span>
+          <span class="fare-price">mkt.</span>
+        </span>
+        <span class="fare-desc" id="desc-dried-lions-mane">Our flagship, dehydrated at the farm for long shelf life and concentrated flavor — perfect for retail bags, off-season menus and pantry stock.</span>
+        <span class="fare-added" aria-hidden="true">✓ added to your sheet</span>
+      </button>
 
     </div>
+    <p class="fare-legend"><b>mkt.</b> — current wholesale price, quoted per account; request yours on the coupon below.</p>
   </div>
 </section>
 
-<!-- ============ THE MORNING HARVEST STORY ============ -->
-<section id="harvest">
+<!-- ============ DATELINED FIELD REPORT (evolve #harvest) ============ -->
+<section id="harvest" class="report">
   <div class="wrap">
-    <div class="story-grid">
-      <div>
-        <span class="eyebrow">The Fresh-Morning Harvest</span>
-        <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin:.5rem 0 1rem">We don't ship it. We cut it and drive it to you.</h2>
-        <p style="color:var(--ink-soft);font-size:1.06rem;margin-bottom:1.4rem">Most "fresh" mushrooms on a kitchen's back dock are already three, four, five days off the block — trucked through a distributor, sweating in a case. Ours are cut the same morning they reach your door. That's the whole idea, and it's why it tastes different.</p>
-        <ul class="timeline">
-          <li><span class="time">Before dawn</span><div><b>We harvest</b><p>John walks the grow room at first light and cuts only what's ordered and at its peak that day.</p></div></li>
-          <li><span class="time">Morning</span><div><b>We pack cold</b><p>Straight into clean, breathable packaging — no long cold-chain, no middle-man warehouse.</p></div></li>
-          <li><span class="time">Same day</span><div><b>We deliver</b><p>Into your kitchen or cooler within hours, on a set weekly route you can count on.</p></div></li>
-        </ul>
-      </div>
-      <div class="photo-block">
-        <span class="spores" aria-hidden="true"></span>
-        <div style="position:relative">
-          <div class="big">Hours,<br>not days.</div>
-          <p>Fresher mushrooms last longer on your shelf, hold better on the plate, and cut your spoilage. Freshness isn't a slogan here — it's the delivery schedule.</p>
-        </div>
-      </div>
+    <div class="section-head" style="text-align:center">
+      <span class="eyebrow">Field Report · Flag Pond, Tennessee</span>
+      <h2>We don't ship it. We cut it and drive it to you.</h2>
+    </div>
+    <div class="report-body" data-settle>
+      <p class="drop">Most "fresh" mushrooms on a kitchen's back dock are already three, four, five days off the block — trucked through a distributor, sweating in a case. Ours are cut the same morning they reach your door. That's the whole idea, and it's why it tastes different. John walks the grow room at first light and cuts only what's ordered and at its peak that day, packs it cold into clean, breathable packaging, and drives it out on a set weekly route you can count on.</p>
+    </div>
+
+    <div class="pullquote" data-settle>
+      <q>Hours, not days.</q>
+      <cite>The Flag Pond delivery schedule</cite>
+    </div>
+
+    <div class="report-body">
+      <p>Fresher mushrooms last longer on your shelf, hold better on the plate, and cut your spoilage. Freshness isn't a slogan here — it's the delivery schedule, printed and kept.</p>
+    </div>
+
+    <div class="presrun" data-settle>
+      <h3>Today's Cut</h3>
+      <p class="sub">The Press Run</p>
+      <div class="presrun-row"><span class="t">Before dawn</span><span class="d">Cut fresh — Tuesdays &amp; Thursdays, only what's ordered</span></div>
+      <div class="presrun-row"><span class="t">Morning</span><span class="d">Packed cold — no long cold-chain, no middle-man warehouse</span></div>
+      <div class="presrun-row"><span class="t">By 8</span><span class="d">On the route — northbound Tue, southbound Thu</span></div>
+      <div class="presrun-row"><span class="t">By noon</span><span class="d">In your kitchen — hours off the block, not days</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============ DELIVERY ============ -->
+<!-- ============ THE TIMETABLE (evolve #delivery) ============ -->
 <section id="delivery" class="delivery">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow" style="color:var(--gold)">Delivery Cadence</span>
+      <span class="eyebrow" style="color:var(--gold)">The Timetable</span>
       <h2>Two set routes, every week.</h2>
-      <p>We run the same days each week so your kitchen can plan around them. Order by the day before your route and we'll grow and cut to match.</p>
+      <p>We run the same days each week so your kitchen can plan around them. Place your order by the cutoff and we'll grow and cut to match.</p>
     </div>
     <div class="route-grid">
-      <div class="route">
+      <div class="route" data-settle>
         <div class="day">Tuesdays</div>
         <h3>North — Tri-Cities, TN</h3>
         <p>Up through Unicoi County into the Tri-Cities: restaurants, grocers, co-ops and food hubs on the northern route.</p>
         <p class="towns">Erwin · Johnson City · Kingsport · Bristol &amp; nearby</p>
+        <p class="cutoff">Cutoff: order by 6&nbsp;PM Monday — the day before</p>
       </div>
-      <div class="route">
+      <div class="route" data-settle>
         <div class="day">Thursdays</div>
         <h3>South — Asheville Corridor</h3>
         <p>Down I-26 into the Asheville corridor — about fifty minutes from the farm — serving the western North Carolina kitchens.</p>
         <p class="towns">Weaverville · Asheville · Black Mountain &amp; nearby</p>
+        <p class="cutoff">Cutoff: order by 6&nbsp;PM Wednesday — the day before</p>
       </div>
     </div>
     <div class="delivery-terms">
       <div class="term"><b>~100 mi</b><span>Delivery radius around Flag Pond, TN</span></div>
       <div class="term"><b>Free over $50</b><span>Delivery is on us above the minimum</span></div>
       <div class="term"><b>Net-14</b><span>Standard wholesale invoicing terms</span></div>
-      <div class="term"><b>Same-week</b><span>Order by the day before your route</span></div>
+      <div class="term"><b>6 PM</b><span>Cutoff the day before your route</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============ STANDING ORDERS ============ -->
+<!-- ============ THE SUBSCRIPTION DRIVE (evolve #standing) ============ -->
 <section id="standing">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Standing Weekly Orders</span>
-      <h2>Put your kitchen first in line.</h2>
-      <p>Because we grow to order, the accounts that commit to a weekly standing order get the best of the farm — locked pricing and first claim on every harvest.</p>
+    <div class="section-head" style="text-align:center">
+      <span class="eyebrow">The Subscription Drive</span>
+      <h2>Subscribe — put your kitchen first in line.</h2>
+      <p>Because we grow to order, the accounts that subscribe to a weekly standing order get the best of the farm — locked pricing and first claim on every harvest.</p>
     </div>
     <div class="perks-grid">
-      <div class="perk"><span class="n">1</span><div><h3>Locked pricing</h3><p>Your per-pound price is set and held for the season — no week-to-week surprises when you're costing a menu.</p></div></div>
-      <div class="perk"><span class="n">2</span><div><h3>First claim on harvest</h3><p>Standing orders are grown and reserved before any open inventory. When a crop runs tight, you're covered first.</p></div></div>
-      <div class="perk"><span class="n">3</span><div><h3>Grown to your numbers</h3><p>We plant to your standing quantities, so what you need is already coming out of the room — not something we hope to have.</p></div></div>
-      <div class="perk"><span class="n">4</span><div><h3>One less thing to chase</h3><p>Set it once and it arrives on your route day, every week. Adjust anytime with a quick call.</p></div></div>
+      <div class="perk" data-settle><span class="n">1</span><div><h3>Locked pricing</h3><p>Your per-pound price is set and held for the season — no week-to-week surprises when you're costing a menu.</p></div></div>
+      <div class="perk" data-settle><span class="n">2</span><div><h3>First claim on harvest</h3><p>Subscribers are grown and reserved before any open inventory. When a crop runs tight, you're covered first.</p></div></div>
+      <div class="perk" data-settle><span class="n">3</span><div><h3>Grown to your numbers</h3><p>We plant to your standing quantities, so what you need is already coming out of the room — not something we hope to have.</p></div></div>
+      <div class="perk" data-settle><span class="n">4</span><div><h3>One less thing to chase</h3><p>Subscribe once and it arrives on your route day, every week. Adjust anytime with a quick note.</p></div></div>
     </div>
-    <p style="margin-top:1.8rem;font-size:1.02rem;color:var(--ink-soft)">Want to set up a standing order? <a href="#order" style="font-weight:700;color:var(--accent-ink)">Send us your weekly list</a> and we'll lock in your pricing.</p>
+    <p style="margin-top:1.8rem;font-size:1.02rem;color:var(--ink-soft)">Want to subscribe to the sheet? <a href="#order" style="font-weight:700;color:var(--accent-ink)">Send us your weekly list</a> and we'll lock in your pricing.</p>
   </div>
 </section>
 
-<!-- ============ ORDER / WHOLESALE PRICING ============ -->
+<!-- ============ THE CLIP-OUT COUPON (evolve #order) ============ -->
 <section id="order" class="order">
   <div class="wrap">
+    <div class="clip-line" aria-hidden="true">✂ clip &amp; send</div>
     <div class="order-card">
-      <span class="eyebrow" style="color:var(--gold)">How to Order</span>
-      <h2>Request wholesale pricing or start an order.</h2>
-      <p>Tell us what your kitchen needs and we'll reply with wholesale pricing and your first delivery. We grow to order, so every request helps us plan the harvest.</p>
+      <span class="eyebrow">The Order Coupon</span>
+      <h2>Send your sheet.</h2>
+      <p class="blurb">Fill in your weekly list and we'll reply with wholesale pricing and your first delivery. Tap the Bill of Fare above to fill this in for you.</p>
+      <p class="order-honest">A real reply from the farm — not an auto-responder.</p>
       <form class="order-form" name="wholesale" method="POST" action="__SET_FORM_ENDPOINT__" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="wholesale">
         <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
@@ -502,30 +664,36 @@
         <div class="ff"><label for="f-email">Email</label><input id="f-email" type="email" name="email" required></div>
         <div class="ff"><label for="f-phone">Phone (optional)</label><input id="f-phone" type="tel" name="phone"></div>
         <div class="ff"><label for="f-route">Route day</label><select id="f-route" name="route"><option>Tuesday — Tri-Cities (north)</option><option>Thursday — Asheville corridor (south)</option><option>Not sure yet</option></select></div>
-        <div class="ff"><label for="f-list">What you'd like</label><textarea id="f-list" name="list" rows="3" placeholder="Which mushrooms, rough weekly quantity…"></textarea></div>
-        <button class="btn btn-primary" type="submit">Request Wholesale Pricing</button>
+        <div id="sheet-so-far" class="sheet-panel" aria-live="polite">
+          <p class="sheet-h">Your sheet so far</p>
+          <p id="sheet-empty" class="sheet-empty">Tap a mushroom in the Bill of Fare above to start your sheet.</p>
+          <ul id="sheet-list"></ul>
+          <p class="sheet-note">Illustrative weekly portions — we confirm real quantities and pricing when we reply.</p>
+        </div>
+        <div class="ff"><label for="f-list">What you'd like</label><textarea id="f-list" name="list" rows="4" placeholder="Which mushrooms, rough weekly quantity…"></textarea></div>
+        <button class="btn btn-primary" type="submit">Send your sheet</button>
       </form>
       <div class="order-steps">
         <div class="step"><span class="s">Step 1</span><b>Tell us your list</b><p>Which mushrooms, roughly how much, and which route day works — Tuesday north or Thursday south.</p></div>
         <div class="step"><span class="s">Step 2</span><b>We confirm &amp; price</b><p>We reply to confirm quantities, wholesale pricing and your first delivery. Net-14 for accounts.</p></div>
         <div class="step"><span class="s">Step 3</span><b>Fresh on your route day</b><p>Cut the morning of delivery and dropped at your door — free over $50.</p></div>
       </div>
-      <p style="margin-top:1.8rem;font-size:.94rem;color:#cfc9b6">Restaurants · grocers · co-ops · food hubs — wholesale &amp; direct-to-kitchen.</p>
+      <p style="margin-top:1.8rem;font-size:.94rem;color:var(--ink-soft)">Restaurants · grocers · co-ops · food hubs — wholesale &amp; direct-to-kitchen.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ ABOUT ============ -->
+<!-- ============ EDITOR'S LETTER (evolve #about) ============ -->
 <section id="about">
   <div class="wrap">
     <div class="about-grid">
       <div class="about-portrait">
         <div class="cap"><b>John Oliver</b><br>Grower · Flag Pond, Tennessee</div>
       </div>
-      <div>
-        <span class="eyebrow">About the Farm</span>
+      <div class="about-col">
+        <span class="eyebrow">Editor's Letter</span>
         <h2>A new farm, an old promise: fresh and reliable.</h2>
-        <p>Flag Pond Mushroom Farm is a small growing operation tucked in the mountains of Unicoi County, Tennessee, just north of the North Carolina line — built and run by John Oliver, one clean flush at a time.</p>
+        <p class="drop">Flag Pond Mushroom Farm is a small growing operation tucked in the mountains of Unicoi County, Tennessee, just north of the North Carolina line — built and run by John Oliver, one clean flush at a time.</p>
         <p>We're new, and we're not going to pretend otherwise. What we offer isn't a decade of awards; it's something a lot of kitchens have trouble finding: mushrooms that are genuinely fresh, a grower who actually calls you back, and a delivery day you can set your prep list by. When you order from us, you're talking to the person who grew it.</p>
         <p>Everything we grow is cut here, by hand, the morning it goes to you. That's a promise we can actually keep — and it's the whole reason the farm exists.</p>
         <p class="signoff">— John, Flag Pond Mushroom Farm</p>
@@ -534,18 +702,18 @@
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
+<!-- ============ PARTICULARS (evolve #contact) ============ -->
 <section id="contact" class="contact">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow" style="color:var(--gold)">Contact</span>
+      <span class="eyebrow" style="color:var(--gold)">Particulars</span>
       <h2>Let's get you on a route.</h2>
     </div>
     <div class="contact-grid">
       <ul class="contact-list">
         <li>
           <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.58 3.6a1 1 0 01-.24 1L6.6 10.8z"/></svg></span>
-          <div><b>Order Line</b><span>Dedicated order line — coming soon</span><br><span style="font-size:.85rem">For now, <a href="#order">send your list through the order form</a> and we'll reply with pricing.</span></div>
+          <div><b>Order Line</b><span>Dedicated order line — coming soon</span><br><span style="font-size:.85rem">For now, <a href="#order">send your list through the order coupon</a> and we'll reply with pricing.</span></div>
         </li>
         <li>
           <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></svg></span>
@@ -564,14 +732,14 @@
           <li><span aria-hidden="true">🤝</span> Co-ops</li>
           <li><span aria-hidden="true">📦</span> Food hubs &amp; distributors</li>
         </ul>
-        <p style="color:#cfc9b6;font-size:.92rem;margin-top:1rem">Wholesale and direct-to-kitchen, within about 100 miles of the farm. Standing weekly accounts get locked pricing and first claim on every harvest.</p>
-        <a class="btn btn-primary" href="#order" style="margin-top:1.2rem">Request Wholesale Pricing</a>
+        <p style="color:#cfc9b6;font-size:.92rem;margin-top:1rem">Wholesale and direct-to-kitchen, within about 100 miles of the farm. Subscribers get locked pricing and first claim on every harvest.</p>
+        <a class="btn btn-primary" href="#order" style="margin-top:1.2rem">Send your sheet</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
+<!-- ============ COLOPHON (footer) ============ -->
 <footer>
   <div class="wrap foot-grid">
     <div>
@@ -579,11 +747,14 @@
       <div>Fresh gourmet mushrooms · Flag Pond, TN · Unicoi County</div>
     </div>
     <div style="text-align:center">
-      <a href="#order" style="font-weight:700">Request wholesale pricing</a><br>
+      <a href="#order" style="font-weight:700">Send your sheet</a><br>
       <span>Tuesdays north · Thursdays south · Free over $50 · Net-14</span>
     </div>
   </div>
-  <div class="foot-legal">
+  <div class="foot-colophon">
+    THE MORNING SHEET — set in Fraunces &amp; Nunito Sans on warm cream, printed to order. Vol.&nbsp;I.
+  </div>
+  <div class="foot-legal" style="text-align:center">
     &copy; <span id="yr">2026</span> Flag Pond Mushroom Farm · Flag Pond, Tennessee
   </div>
 </footer>
@@ -592,10 +763,91 @@
   // Keep the footer year current. Degrades to the hardcoded year above.
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // Order-form safety guard. Until a live endpoint is wired (see DEPLOY.md §6), the form
-  // action is the placeholder "__SET_FORM_ENDPOINT__" — POSTing to it would 404 and kill
-  // the primary CTA. Until a real https endpoint is set, confirm gracefully instead of
-  // submitting. Once action is a real https URL, this guard steps aside automatically.
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Masthead collapse on scroll (keeps the stamp CTA + running head on screen) ----
+  (function () {
+    var header = document.querySelector('header');
+    if (!header) return;
+    var onScroll = function () {
+      if (window.pageYOffset > 120) header.classList.add('collapsed');
+      else header.classList.remove('collapsed');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // ---- IntersectionObserver "ink settle" fade-up (progressive; safe default = visible) ----
+  (function () {
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    var els = document.querySelectorAll('[data-settle]');
+    els.forEach(function (el) { el.classList.add('pre-settle'); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('settled'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  // ---- The Bill of Fare: tap-to-fill the coupon + portions-math into "Your sheet so far" ----
+  (function () {
+    var portions = {
+      "Lion's Mane": "Lion's Mane — ~14 lb ≈ about 70 seared 'scallop' medallions this week",
+      "Blue & Grey Oyster": "Blue & Grey Oyster — ~10 lb ≈ about 120 sauté portions",
+      "Golden & Pink Oyster": "Golden & Pink Oyster — ~8 lb ≈ about 90 plated specials",
+      "Shiitake": "Shiitake — ~10 lb ≈ about 100 stir-fry or broth portions",
+      "Chestnut": "Chestnut — ~9 lb ≈ about 80 roasted sides",
+      "Dried Lion's Mane": "Dried Lion's Mane — ~2 lb dried ≈ about 40 rehydrated soup portions"
+    };
+    var textarea = document.getElementById('f-list');
+    var panel = document.getElementById('sheet-so-far');
+    var list = document.getElementById('sheet-list');
+    var coupon = document.getElementById('order');
+    var added = {};
+    var buttons = document.querySelectorAll('.fare-item');
+
+    function scrollToCoupon() {
+      if (!coupon) return;
+      coupon.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      // Move focus to the coupon list field for keyboard users (no scroll-jack).
+      if (textarea) { try { textarea.focus({ preventScroll: true }); } catch (err) { textarea.focus(); } }
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var sp = btn.getAttribute('data-species') || '';
+        if (!sp) return;
+        if (!added[sp]) {
+          added[sp] = true;
+          // (1) append to the coupon textarea, deduped
+          if (textarea) {
+            var cur = textarea.value.replace(/\s+$/, '');
+            textarea.value = cur ? cur + '\n' + sp : sp;
+          }
+          // (2) write the illustrative portions line into the always-visible aria-live
+          // panel. The panel is never display:none, so the appended <li> is in the
+          // accessibility tree when it changes and IS announced — including the first one.
+          if (panel) panel.classList.add('has-items');
+          if (list) {
+            var li = document.createElement('li');
+            li.textContent = portions[sp] || sp;
+            list.appendChild(li);
+          }
+          // (4) fade in the "added" tag + settle the leader dots
+          btn.classList.add('is-added');
+        }
+        // (3) smooth-scroll to the coupon
+        scrollToCoupon();
+      });
+    });
+  })();
+
+  // ---- Order-form safety guard (PRESERVED logic) + RECEIVED stamp on submit ----
+  // Until a live endpoint is wired (see DEPLOY.md §6), the form action is the placeholder
+  // "__SET_FORM_ENDPOINT__" — POSTing to it would 404 and kill the primary CTA. Until a real
+  // https endpoint is set, confirm gracefully instead of submitting. Once action is a real
+  // https URL, this guard steps aside automatically and never blocks the real POST.
   (function () {
     var form = document.querySelector('form.order-form');
     if (!form) return;
@@ -607,13 +859,14 @@
       var raw = (form.querySelector('#f-name') || {}).value || '';
       var name = raw.replace(/[<>&]/g, '').trim().slice(0, 60);
       var note = document.createElement('div');
+      note.className = 'received-note';
       note.setAttribute('role', 'status');
-      note.style.cssText = 'background:rgba(247,242,231,.10);border:1px solid rgba(247,242,231,.28);border-radius:12px;padding:1.15rem 1.25rem;color:#f7f2e7;font-size:1.02rem;line-height:1.55';
-      note.innerHTML = '<b>Thanks' + (name ? ', ' + name : '') + '!</b><br>' +
-        'Your list is ready to go. Online ordering isn’t switched on for this preview yet — ' +
-        'when the site launches, this form sends your order straight to the farm.';
+      note.innerHTML = '<span class="received-stamp">Received</span><br>' +
+        '<b>Thanks' + (name ? ', ' + name : '') + '!</b>' +
+        '<p>Your sheet is ready to go. Online ordering isn’t switched on for this preview yet — ' +
+        'when the site launches, this coupon sends your list straight to the farm, and you get a real reply, not an auto-responder.</p>';
       form.replaceWith(note);
-      note.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      note.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   })();
 </script>
